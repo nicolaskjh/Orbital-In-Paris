@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import TextField from "@/components/textField";
 import ForgotPassword from "./components/forgotPassword";
 import Button from "@/components/button";
+import RedirectTo from "@/components/redirectTo";
 import { useSignIn } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
 
@@ -12,8 +13,8 @@ const LoginPage = () => {
   const router = useRouter();
   const { signIn, setActive, isLoaded } = useSignIn();
 
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [ emailAddress, setEmailAddress ] = React.useState("");
+  const [ password, setPassword ] = React.useState("");
 
 
   const onLoginPress = async () => {
@@ -26,8 +27,7 @@ const LoginPage = () => {
         identifier: emailAddress,
         password,
       });
-      // This is an important step,
-      // This indicates the user is signed in
+
       await setActive({ session: completeSignIn.createdSessionId });
       router.back();
       router.back();
@@ -46,8 +46,9 @@ const LoginPage = () => {
         <TextField placeholder="Password" value={password} secureEntry={true} onChangeText={(password) => setPassword(password)}/>
         <View className="flex flex-row w-3/4 justify-between">
           <ForgotPassword/>
-          <Button type="plain" text="Login" textType="solid" size="sm" onPress={onLoginPress}/>
+          <Button type="plain" text="Login" textType="normal" size="sm" corners="rounded" onPress={onLoginPress}/>
         </View>
+        <RedirectTo redirect="signup"/>
       </View>  
     </View>
   );

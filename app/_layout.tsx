@@ -97,6 +97,46 @@ function RootLayoutNav() {
           presentation: 'modal',
         }}
       />
+      <Stack.Screen
+        name="signup"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="home"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="map"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="messages"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="profile"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+          presentation: 'modal',
+        }}
+      />
       </Stack>
     </ThemeProvider>
   );

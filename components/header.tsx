@@ -10,7 +10,7 @@ const Header = ( {text, size}: HeaderProps ) => {
   const fontSize = size === "sm" ? "text-md" : size === "md" ? "text-base" : "text-lg";
 
   return (
-    <Text className={`font-bold font-sans ${fontSize}`}>{text}</Text>
+    <Text className={`font-bold font-sans m-4 ${fontSize}`}>{text}</Text>
   );
 }
 
