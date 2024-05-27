@@ -75,9 +75,9 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
-      <Stack initialRouteName='start'>
+      <Stack>
       <Stack.Screen
-        name="start"
+        name="index"
         options={{
           headerShown: false,
           gestureEnabled: false,
@@ -105,7 +105,27 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="map"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="messages"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="profile"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
         }}
       />
       </Stack>
