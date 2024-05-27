@@ -1,6 +1,6 @@
 import React from "react";
-import StartPage from "./screens/start/index";
+import HomePage from "./screens/home/index";
 
-export default function Start() {
-  return <StartPage/>;
+export default function Home() {
+  return <HomePage/>;
 };

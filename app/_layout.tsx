@@ -33,11 +33,6 @@ export {
   ErrorBoundary,
 } from 'expo-router';
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: 'home',
-};
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -63,7 +58,7 @@ export default function RootLayout() {
   }
 
   return (<ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}> 
-            <RootLayoutNav />
+            <RootLayoutNav/>
           </ClerkProvider>);
 }
 
@@ -80,7 +75,7 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <Stack initialRouteName='start'>
       <Stack.Screen
         name="start"
         options={{
@@ -107,30 +102,6 @@ function RootLayoutNav() {
       />
       <Stack.Screen
         name="home"
-        options={{
-          headerShown: false,
-          gestureEnabled: false,
-          presentation: 'modal',
-        }}
-      />
-      <Stack.Screen
-        name="map"
-        options={{
-          headerShown: false,
-          gestureEnabled: false,
-          presentation: 'modal',
-        }}
-      />
-      <Stack.Screen
-        name="messages"
-        options={{
-          headerShown: false,
-          gestureEnabled: false,
-          presentation: 'modal',
-        }}
-      />
-      <Stack.Screen
-        name="profile"
         options={{
           headerShown: false,
           gestureEnabled: false,

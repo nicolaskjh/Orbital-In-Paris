@@ -38,7 +38,7 @@ const LoginPage = () => {
   }
 
   return (
-    <View className="flex-1 flex-col justify-between items-center">
+    <View className="flex-1 flex-col justify-between items-center bg-white">
       <Logo/>
       <Header text="Login Here!" size="lg"/>
       <View className="flex w-full h-2/5 items-center">
@@ -46,7 +46,7 @@ const LoginPage = () => {
         <TextField placeholder="Password" value={password} secureEntry={true} onChangeText={(password) => setPassword(password)}/>
         <View className="flex flex-row w-3/4 justify-between">
           <ForgotPassword/>
-          <Button type="plain" text="Login" textType="normal" size="sm" corners="rounded" onPress={onLoginPress}/>
+          <Button type="plain" text="Login" textType="normal" size="sm" corners="rounded" onPress={() => router.replace('home')}/>
         </View>
         <RedirectTo redirect="signup"/>
       </View>  

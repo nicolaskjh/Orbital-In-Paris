@@ -3,7 +3,7 @@ import { TouchableOpacity, Text } from "react-native";
 
 const ForgotPassword = () => {
   return (
-    <TouchableOpacity className="background-transparent">
+    <TouchableOpacity className="pt-1 background-transparent">
       <Text className="text-gray-500">Forgot Password?</Text>
     </TouchableOpacity>
   );

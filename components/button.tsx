@@ -10,7 +10,7 @@ type ButtonProps = {
 };
 
 const Button = ({ type, size, text, textType, corners, onPress }: ButtonProps) => {
-    const backgroundColour = type === "primary" ? "bg-blue-500" : type === "secondary" ? "bg-gray-300" : "bg-transparent";
+    const backgroundColour = type === "primary" ? "bg-blue-500" : type === "secondary" ? "bg-gray-300" : "bg-white";
     const textColour = type === "primary" ? "text-white" : type === "borderless" ? "text-grey" : "text-black";
     const fontWeight = textType === "bold" ? "font-bold" : "font-normal";
     const width = size === "sm" ? "w-1/4" : size === "md" ? "w-1/2" : size === "lg" ? "w-3/4" : "w-fit";
@@ -21,7 +21,7 @@ const Button = ({ type, size, text, textType, corners, onPress }: ButtonProps) =
     return (
         <TouchableOpacity
             onPress={onPress}
-            className={`p-2 border ${borderColour} ${corner} flex justify-center items-center ${backgroundColour} ${width} ${height}`}
+            className={`p-2 m-1 border ${borderColour} ${corner} flex justify-center items-center ${backgroundColour} ${width} ${height}`}
         >
             <Text className={`text-base ${fontWeight} ${textColour}`}>{text}</Text>
         </TouchableOpacity>
