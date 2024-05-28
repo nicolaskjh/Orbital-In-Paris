@@ -42,8 +42,8 @@ const LoginPage = () => {
       <Logo/>
       <Header text="Login Here!" size="lg"/>
       <View className="flex w-full h-2/5 items-center">
-        <TextField placeholder="Email" value={emailAddress} secureEntry={false} onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
-        <TextField placeholder="Password" value={password} secureEntry={true} onChangeText={(password) => setPassword(password)}/>
+        <TextField placeholder="Email" value={emailAddress} secureEntry={false} borders="bottom" onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
+        <TextField placeholder="Password" value={password} secureEntry={true} borders="bottom" onChangeText={(password) => setPassword(password)}/>
         <View className="flex flex-row w-3/4 justify-between">
           <ForgotPassword/>
           <Button type="plain" text="Login" textType="normal" size="sm" corners="rounded" onPress={() => router.replace('home')}/>

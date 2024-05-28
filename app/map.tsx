@@ -1,6 +1,6 @@
 import React from "react";
-import HomePage from "./screens/home/index";
+import MapPage from "./screens/map/index";
 
 export default function Map() {
-  return <HomePage/>;
+  return <MapPage/>;
 };

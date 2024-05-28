@@ -5,10 +5,10 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 const NavigationBar = () => {
     const tabs = [
-        { key: 1, name: "Home", source: FontAwesome, icon: "home", path: "/home" },
-        { key: 2, name: "Map", source: FontAwesome, icon: "map-marker", path: "/map" },
-        { key: 3, name: "Messages", source: Ionicons, icon: "chatbubble-ellipses", path: "/messages" },
-        { key: 4, name: "Profile", source: Ionicons, icon: "person-circle-sharp", path: "/profile" },
+        { id: 0, name: "Home", source: FontAwesome, icon: "home", path: "/home" },
+        { id: 1, name: "Map", source: FontAwesome, icon: "map-marker", path: "/map" },
+        { id: 2, name: "Messages", source: Ionicons, icon: "chatbubble-ellipses", path: "/messages" },
+        { id: 3, name: "Profile", source: Ionicons, icon: "person-circle-sharp", path: "/profile" },
     ];
 
     return (
@@ -16,7 +16,7 @@ const NavigationBar = () => {
             {tabs.map((tab) => {
                 const IconComponent = tab.source;
                 return (
-                  <View className="flex w-1/6 items-center">
+                  <View key={tab.id} className="flex w-1/6 items-center">
                     <Link href={tab.path} className="flex flex-col">
                         <View className="items-center">
                             <IconComponent name={tab.icon} size={25} color="black"/>

@@ -1,6 +1,6 @@
 import React from "react";
-import HomePage from "./screens/home/index";
+import ProfilePage from "./screens/profile/index";
 
 export default function Profile() {
-  return <HomePage/>;
+  return <ProfilePage/>;
 };

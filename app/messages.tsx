@@ -1,6 +1,6 @@
 import React from "react";
-import HomePage from "./screens/home/index";
+import MessagesPage from "./screens/messages/index";
 
 export default function Messages() {
-  return <HomePage/>;
+  return <MessagesPage/>;
 };

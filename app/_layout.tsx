@@ -68,8 +68,8 @@ function RootLayoutNav() {
   const {isLoaded, isSignedIn} = useAuth();
 
   useEffect(() => {
-    if (isLoaded && !isSignedIn) {
-      router.replace('start')
+    if (isLoaded && isSignedIn) {
+      router.replace('home')
     }
   }, [isLoaded])
 
@@ -81,7 +81,6 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-          presentation: 'modal',
         }}
       />
       <Stack.Screen
@@ -89,7 +88,6 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-          presentation: 'modal',
         }}
       />
       <Stack.Screen
@@ -97,7 +95,6 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-          presentation: 'modal',
         }}
       />
       <Stack.Screen
