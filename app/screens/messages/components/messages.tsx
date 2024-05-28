@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import MessageBar from './messageBar';
 
 const Messages = () => {
@@ -9,11 +9,12 @@ const Messages = () => {
   ]
 
   return (
-    <ScrollView className="flex flex-col w-full h-4/5 bg-white">
-      {messages.map((message, index) => {
+    <ScrollView className="flex flex-col w-full h-4/5 bg-white border-t">
+      {messages.map((message) => {
         return (
           <MessageBar key={message.id} name={message.name} message={message.message}/>
       )})}
+      <Text className="text-lg font-bold text-black">Placeholder</Text>
     </ScrollView>
   );
 }
