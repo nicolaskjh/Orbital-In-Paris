@@ -26,7 +26,7 @@ const ExternalLoginButton = ( {icon, strategy} : ExternalLoginButtonProps ) => {
 
       if (createdSessionId) {
         setActive!({ session: createdSessionId });
-        router.push('/');
+        router.replace('home');
       } 
     } catch (err) {
       console.error('Auth error', err);

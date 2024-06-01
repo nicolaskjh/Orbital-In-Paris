@@ -8,6 +8,7 @@ import Button from "@/components/button";
 import RedirectTo from "@/components/redirectTo";
 import { useSignIn } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
+import ExternalLogin from "../start/components/externalLogin";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -29,9 +30,7 @@ const LoginPage = () => {
       });
 
       await setActive({ session: completeSignIn.createdSessionId });
-      router.back();
-      router.back();
-      router.push('/');
+      router.replace('home');
     } catch (err: any) {
       alert(err.errors[0].message);
     }
@@ -48,6 +47,7 @@ const LoginPage = () => {
           <ForgotPassword/>
           <Button type="plain" text="Login" textType="normal" size="sm" corners="rounded" onPress={() => router.replace('home')}/>
         </View>
+        <ExternalLogin/>
         <RedirectTo redirect="signup"/>
       </View>  
     </View>

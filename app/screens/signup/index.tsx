@@ -12,6 +12,7 @@ const SignupPage = () => {
   const router = useRouter();
   const { isLoaded, signUp, setActive } = useSignUp();
 
+  const [username, setUsername] = React.useState("");
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [pendingVerification, setPendingVerification] = React.useState(false);
@@ -25,6 +26,7 @@ const SignupPage = () => {
       try {
         await signUp.create({
           emailAddress,
+          username,
           password,
         });
   
@@ -64,6 +66,7 @@ const SignupPage = () => {
           <Header text="Signup Here!" size="lg"/>
           <View className="flex w-full h-2/5 items-center">
             <TextField placeholder="Email" value={emailAddress} secureEntry={false} borders="bottom" onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
+            <TextField placeholder="Username" value={username} secureEntry={false} borders="bottom" onChangeText={(username) => setUsername(username)}/>
             <TextField placeholder="Password" value={password} secureEntry={true} borders="bottom" onChangeText={(password) => setPassword(password)}/>
             <View className="flex w-3/4 items-end">
               <Button type="plain" text="Signup" textType="normal" size="sm" corners="rounded" onPress={onSignupPress}/>

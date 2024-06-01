@@ -15,6 +15,10 @@ const ProfilePage = ( {name}: ProfilePageProps ) => {
   const router = useRouter();
   const {signOut, isSignedIn} = useAuth();
 
+  if (!isSignedIn) {
+    router.replace('/');
+  }
+
   return (
     <View className="flex-1 justify-between pt-24 bg-white">
       <View className="flex flex-row items-center pl-4">
