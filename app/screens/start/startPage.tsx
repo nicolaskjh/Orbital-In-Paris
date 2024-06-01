@@ -5,8 +5,10 @@ import Header from "@/components/header";
 import Button from "@/components/button";
 import ExternalLogin from "./components/externalLogin";
 import { useRouter } from 'expo-router';
+import { useWarmUpBrowser } from '@/hooks/useWarmUpBrowser'
 
 const StartPage = () => {
+  useWarmUpBrowser();
   const router = useRouter();
 
   return (
