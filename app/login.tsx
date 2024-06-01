@@ -1,6 +1,8 @@
 import React from "react";
-import LoginPage from "./screens/login/login";
+import LoginPage from "./screens/login/loginPage";
 
-export default function Login() {
+const Login = () => { 
   return <LoginPage/>;
-};
+}
+
+export default Login;

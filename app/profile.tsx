@@ -1,6 +1,8 @@
 import React from "react";
-import ProfilePage from "./screens/profile/index";
+import ProfilePage from "./screens/profile/profilePage";
 
-export default function Profile() {
+const Profile = () => {
   return <ProfilePage name="Javier"/>;
-};
+}
+
+export default Profile;

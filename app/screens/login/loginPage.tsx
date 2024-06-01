@@ -5,7 +5,6 @@ import Header from "@/components/header";
 import TextField from "@/components/textField";
 import ForgotPassword from "./components/forgotPassword";
 import Button from "@/components/button";
-import RedirectTo from "@/components/redirectTo";
 import { useSignIn } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
 import ExternalLogin from "../start/components/externalLogin";
@@ -41,14 +40,14 @@ const LoginPage = () => {
       <Logo/>
       <Header text="Login Here!" size="lg"/>
       <View className="flex w-full h-2/5 items-center">
-        <TextField placeholder="Email" value={emailAddress} secureEntry={false} borders="bottom" onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
-        <TextField placeholder="Password" value={password} secureEntry={true} borders="bottom" onChangeText={(password) => setPassword(password)}/>
+        <TextField placeholder="Email" value={emailAddress} secureEntry={false} border="bottom" onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
+        <TextField placeholder="Password" value={password} secureEntry={true} border="bottom" onChangeText={(password) => setPassword(password)}/>
         <View className="flex flex-row w-3/4 justify-between">
           <ForgotPassword/>
-          <Button type="plain" text="Login" textType="normal" size="sm" corners="rounded" onPress={() => router.replace('home')}/>
+          <Button type="plain" text="Login" textType="normal" size="sm" corners="rounded" onPress={onLoginPress}/>
         </View>
         <ExternalLogin/>
-        <RedirectTo redirect="signup"/>
+        <Button type="borderless" text="Don't have an account?" textType="normal" size="lg" corners="rounded" onPress={() => router.replace('signup')}/>
       </View>  
     </View>
   );

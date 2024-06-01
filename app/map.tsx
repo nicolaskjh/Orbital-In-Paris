@@ -1,6 +1,8 @@
 import React from "react";
-import MapPage from "./screens/map/index";
+import MapPage from "./screens/map/mapPage";
 
-export default function Map() {
+const Map = () => {
   return <MapPage/>;
-};
+} 
+
+export default Map;

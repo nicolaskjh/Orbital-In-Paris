@@ -1,6 +1,8 @@
 import React from "react";
-import StartPage from "./screens/start/start";
+import StartPage from "./screens/start/startPage";
 
-export default function Index() {
+const Index = () => {
   return <StartPage/>;
-}
+};
+
+export default Index; 
