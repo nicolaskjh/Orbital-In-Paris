@@ -6,6 +6,8 @@ import TextField from '@/components/textField';
 import NavigationBar from '@/components/navigationBar';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
+import { createItinerary } from 'utils/supabaseRequests';
+import { useAuth } from '@clerk/clerk-expo';
 
 const NewTripPage = () => {
   const router = useRouter();
@@ -13,6 +15,21 @@ const NewTripPage = () => {
   const[city, setCity] = useState("");
   const[startDate, setStartDate] = useState("");
   const[endDate, setEndDate] = useState("");
+
+  const {userId, getToken} = useAuth();
+
+  const handleCreateNewItinerary = async () => {
+    const token = await getToken({ template: 'supabase' });
+    const itinerary = {
+      country,
+      city,
+      startDate,
+      endDate
+    }
+    const iti = await createItinerary({userId, token, itinerary});
+    console.log(iti);
+    router.replace('home');
+  }
 
   return (
     <View className="flex flex-col h-full justify-between bg-white pt-24">
@@ -24,7 +41,7 @@ const NewTripPage = () => {
         <TextField placeholder="End Date (YYYY-MM-DD)" value={endDate} onChangeText={setEndDate}/>
       </View>
       <View className="flex h-1/6 w-full items-center">
-        <Button text="Create Trip" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => router.replace('trip')}/>
+        <Button text="Create Trip" type="plain" textType="bold" size="lg" corners="rounded" onPress={handleCreateNewItinerary}/>
       </View>
       <NavigationBar/>
     </View>
