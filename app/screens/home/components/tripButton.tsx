@@ -7,10 +7,11 @@ import { useRouter } from 'expo-router';
 type TripButtonProps = {
   city: string,
   country: string,
-  duration: string,
+  startDate: string,
+  endDate: string
 };
 
-const TripButton = ( {city, country, duration}: TripButtonProps ) => {
+const TripButton = ( {city, country, startDate,endDate}: TripButtonProps ) => {
   const router = useRouter();
 
   return (
@@ -23,7 +24,8 @@ const TripButton = ( {city, country, duration}: TripButtonProps ) => {
           <FontAwesome name="plane" size={25} color="black"/>
           <View className="flex flex-col pl-2">
             <Text className="text-base font-bold">{city}, {country}</Text>
-            <Text className="text-sm">{duration}</Text>
+            <Text className="text-sm">{startDate}</Text>
+            <Text className="text-sm">{endDate}</Text>
           </View>
         </TouchableOpacity>
       </LinearGradient>

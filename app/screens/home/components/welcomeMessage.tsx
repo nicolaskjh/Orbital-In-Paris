@@ -8,8 +8,8 @@ type WelcomeMessageProps = {
 const WelcomeMessage = ( {name} : WelcomeMessageProps ) => {
   return (
     <View className="flex flex-col h-1/2 pt-24 pl-8">
-      {!name && (<Text className="text-3xl font-bold">Welcome!</Text>)}
-      {name && (<Text className="text-3xl font-bold">Welcome, {name}!</Text>)}
+      {name == 'null' && (<Text className="text-3xl font-bold">Welcome!</Text>)}
+      {name != 'null' && (<Text className="text-3xl font-bold">Welcome, {name}!</Text>)}
     </View>
   );
 }
