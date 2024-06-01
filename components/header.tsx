@@ -4,7 +4,7 @@ import { Text } from "react-native";
 type HeaderProps = {
   text: String,
   size: "sm" | "md" | "lg" | "xl",
-  padding: "left" | "no"
+  padding: "left" | "none"
 }
 
 const Header = ( {text, size, padding}: HeaderProps ) => {

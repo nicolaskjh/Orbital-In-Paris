@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { parseISO, format } from "date-fns";
 
 type TripButtonProps = {
   city: string,
@@ -14,6 +15,11 @@ type TripButtonProps = {
 const TripButton = ( {city, country, startDate,endDate}: TripButtonProps ) => {
   const router = useRouter();
 
+  const formatDate = (dateString: string) => {
+    const date = parseISO(dateString);
+    return format(date, 'd MMM');
+  };
+
   return (
     <View className="flex flex-row w-full justify-center m-1">
       <LinearGradient 
@@ -24,8 +30,7 @@ const TripButton = ( {city, country, startDate,endDate}: TripButtonProps ) => {
           <FontAwesome name="plane" size={25} color="black"/>
           <View className="flex flex-col pl-2">
             <Text className="text-base font-bold">{city}, {country}</Text>
-            <Text className="text-sm">{startDate}</Text>
-            <Text className="text-sm">{endDate}</Text>
+            <Text className="text-sm">{formatDate(startDate)} - {formatDate(endDate)}</Text>
           </View>
         </TouchableOpacity>
       </LinearGradient>
