@@ -12,7 +12,8 @@ enum Strategy {
 
 type ExternalLoginButtonProps = {
   icon: string,
-  strategy: Strategy
+  strategy: Strategy,
+  onPress: () => void,
 }
 
 const ExternalLoginButton = ( {icon, strategy} : ExternalLoginButtonProps ) => {
@@ -34,7 +35,7 @@ const ExternalLoginButton = ( {icon, strategy} : ExternalLoginButtonProps ) => {
   }
 
   return (
-    <TouchableOpacity className="border rounded-full mx-1.5 mb-10 p-2 items-center" onPress={onSelectAuth}>
+    <TouchableOpacity className="border rounded-full mx-1.5 mb-10 p-2 items-center" onPress={onPress}>
       <AntDesign name={icon} size={35} />
     </TouchableOpacity>
   );

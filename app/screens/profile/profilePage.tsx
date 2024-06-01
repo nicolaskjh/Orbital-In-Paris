@@ -37,6 +37,11 @@ const ProfilePage = ( {name}: ProfilePageProps ) => {
         <Button text="Update Profile" type="plain" textType="normal" size="lg" corners="rounded" onPress={() => router.replace('login')}/>
         <Button text="Log Out" type="borderless" textType="normal" size="lg" corners="squared" onPress={()=> signOut()}/>
       </View>
+      {!isSignedIn &&
+          <Link href={'/index'}>
+              <Text>Login</Text>
+          </Link>
+        } 
       <NavigationBar/>
     </View>
   );

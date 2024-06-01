@@ -2,5 +2,5 @@ import React from "react";
 import ProfilePage from "./screens/profile/index";
 
 export default function Profile() {
-  return <ProfilePage/>;
+  return <ProfilePage name="Javier"/>;
 };
