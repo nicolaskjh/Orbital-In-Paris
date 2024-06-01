@@ -19,7 +19,7 @@ const TripButton = ( {city, country, duration}: TripButtonProps ) => {
         className="w-3/4 rounded-full border border-black" 
         colors = {["#94afed", "#E4EFE9"]} start = {[0, 0]} end = {[1, 1]} locations = {[0.25, 1]}
       >
-        <TouchableOpacity className="flex flex-row w-full items-center pl-4 py-1.5">
+        <TouchableOpacity className="flex flex-row w-full items-center pl-4 py-1.5" onPress={() => router.replace('trip')}>
           <FontAwesome name="plane" size={25} color="black"/>
           <View className="flex flex-col pl-2">
             <Text className="text-base font-bold">{city}, {country}</Text>

@@ -34,7 +34,7 @@ const ProfilePage = ( {name}: ProfilePageProps ) => {
         <Text className="pl-4">Zazu</Text>
       </View>
       <View className='flex flex-col w-full items-center'>
-        <Button text="Update Profile" type="plain" textType="normal" size="lg" corners="rounded" onPress={() => router.replace('login')}/>
+        <Button text="Update Profile" type="plain" textType="normal" size="lg" corners="rounded"/>
         <Button text="Log Out" type="borderless" textType="normal" size="lg" corners="squared" onPress={()=> signOut()}/>
       </View>
       {!isSignedIn &&

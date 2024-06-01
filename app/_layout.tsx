@@ -135,6 +135,13 @@ function RootLayoutNav() {
           animation: 'none'
         }}
       />
+      <Stack.Screen
+        name="trip"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
       </Stack>
     </ThemeProvider>
   );
