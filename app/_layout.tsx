@@ -108,6 +108,7 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
+          animation: 'none'
         }}
       />
       <Stack.Screen
@@ -115,6 +116,7 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
+          animation: 'none'
         }}
       />
       <Stack.Screen
@@ -122,6 +124,7 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
+          animation: 'none'
         }}
       />
       <Stack.Screen
@@ -129,6 +132,7 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
+          animation: 'none'
         }}
       />
       </Stack>

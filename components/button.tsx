@@ -11,7 +11,7 @@ type ButtonProps = {
 
 const Button = ({ type, size, text, textType, corners, onPress }: ButtonProps) => {
     const backgroundColour = type === "primary" ? "bg-blue-500" : type === "secondary" ? "bg-gray-300" : "bg-white";
-    const textColour = type === "primary" ? "text-white" : type === "borderless" ? "text-grey" : "text-black";
+    const textColour = type === "primary" ? "text-white" : type === "borderless" ? "text-blue-500" : "text-black";
     const fontWeight = textType === "bold" ? "font-bold" : "font-normal";
     const width = size === "sm" ? "w-1/4" : size === "md" ? "w-1/2" : size === "lg" ? "w-3/4" : "w-fit";
     const height = size === "sm" ? "h-10" : size === "md" ? "h-10" : size === "lg" ? "h-10": "h-fit";

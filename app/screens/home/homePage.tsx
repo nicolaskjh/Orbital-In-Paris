@@ -14,7 +14,7 @@ const HomePage = () => {
 
   return (
     <ImageBackground source={background} className="flex-1 flex-col justify-between bg-fixed bg-cover">
-      <WelcomeMessage name={user?.username}/>
+      <WelcomeMessage name={`${user?.username}`}/>
       <View className="flex pl-4">
         <Header text="Upcoming Trips" size="xl"/>
       </View>

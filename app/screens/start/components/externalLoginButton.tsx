@@ -12,8 +12,7 @@ enum Strategy {
 
 type ExternalLoginButtonProps = {
   icon: string,
-  strategy: Strategy,
-  onPress: () => void,
+  strategy: Strategy
 }
 
 const ExternalLoginButton = ( {icon, strategy} : ExternalLoginButtonProps ) => {
@@ -27,7 +26,7 @@ const ExternalLoginButton = ( {icon, strategy} : ExternalLoginButtonProps ) => {
 
       if (createdSessionId) {
         setActive!({ session: createdSessionId });
-        router.replace('home');
+        router.push('/');
       } 
     } catch (err) {
       console.error('Auth error', err);
@@ -35,7 +34,7 @@ const ExternalLoginButton = ( {icon, strategy} : ExternalLoginButtonProps ) => {
   }
 
   return (
-    <TouchableOpacity className="border rounded-full mx-1.5 mb-10 p-2 items-center" onPress={onPress}>
+    <TouchableOpacity className="border rounded-full mx-1.5 mb-10 p-2 items-center" onPress={onSelectAuth}>
       <AntDesign name={icon} size={35} />
     </TouchableOpacity>
   );

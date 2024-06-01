@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 
 type WelcomeMessageProps = {
-  name: String
+  name: string
 }
 
 const WelcomeMessage = ( {name} : WelcomeMessageProps ) => {

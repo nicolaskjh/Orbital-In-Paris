@@ -65,13 +65,13 @@ const SignupPage = () => {
           <Logo/>
           <Header text="Signup Here!" size="lg"/>
           <View className="flex w-full h-2/5 items-center">
-            <TextField placeholder="Email" value={emailAddress} secureEntry={false} borders="bottom" onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
-            <TextField placeholder="Username" value={username} secureEntry={false} borders="bottom" onChangeText={(username) => setUsername(username)}/>
-            <TextField placeholder="Password" value={password} secureEntry={true} borders="bottom" onChangeText={(password) => setPassword(password)}/>
+            <TextField placeholder="Email" value={emailAddress} secureEntry={false} border="bottom" onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
+            <TextField placeholder="Username" value={username} secureEntry={false} border="bottom" onChangeText={(username) => setUsername(username)}/>
+            <TextField placeholder="Password" value={password} secureEntry={true} border="bottom" onChangeText={(password) => setPassword(password)}/>
             <View className="flex w-3/4 items-end">
               <Button type="plain" text="Signup" textType="normal" size="sm" corners="rounded" onPress={onSignupPress}/>
             </View>
-            <RedirectTo redirect="login"/>
+            <Button type="borderless" text="Already have an account?" textType="normal" size="lg" corners="rounded" onPress={() => router.replace('login')}/>
           </View>
         </View>
       )}
@@ -80,7 +80,7 @@ const SignupPage = () => {
           <Logo/>
           <Header text="Verify Your Email" size="lg"/>
           <View className="flex w-full h-2/5 items-center">
-            <TextField placeholder="Verification Code" value={code} secureEntry={false} borders="bottom" onChangeText={(code) => setCode(code)}/>
+            <TextField placeholder="Verification Code" value={code} secureEntry={false} border="bottom" onChangeText={(code) => setCode(code)}/>
             <View className="flex w-3/4 items-end">
               <Button type="plain" text="Verify Email" textType="normal" size="fit" corners="rounded" onPress={onPressVerify}/>
             </View>

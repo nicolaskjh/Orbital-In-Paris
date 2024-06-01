@@ -1,6 +1,8 @@
 import React from "react";
-import HomePage from "./screens/home/homePage";
+import TripPage from "./screens/trip/tripPage";
 
-export default function Home() {
-  return <HomePage/>;
-};
+const Trip = () => {
+  return <TripPage/>;
+}
+
+export default Trip;
