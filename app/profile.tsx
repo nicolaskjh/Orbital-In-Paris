@@ -1,5 +1,5 @@
 import React from "react";
-import ProfilePage from "./screens/profile/index";
+import ProfilePage from "./screens/profile/profilePage";
 
 export default function Profile() {
   return <ProfilePage name="Javier"/>;
