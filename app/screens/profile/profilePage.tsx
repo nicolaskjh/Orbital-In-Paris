@@ -20,7 +20,7 @@ const ProfilePage = ( {name}: ProfilePageProps ) => {
   }
 
   return (
-    <View className="flex-1 justify-between pt-24 bg-white">
+    <View className="flex-1 justify-between pt-20 bg-white">
       <View className="flex flex-row items-center pl-4">
         <ProfilePicture/>
         <Header text="Javier" size="xl"/>

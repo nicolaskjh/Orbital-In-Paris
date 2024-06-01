@@ -26,11 +26,11 @@ const DateSlider = () => {
           <View key={index}>
             <View className="flex flex-row items-center justify-between px-8">
               <AntDesign name="left" size={20} color="black" />
-              {week.map(day => {
+              {week.map((day, index) => {
                 const dayOfWeek = format(day, 'EEEEE')
                 
                 return (
-                  <TouchableOpacity className="items-center justify-center rounded-full w-10 h-10 p-1">
+                  <TouchableOpacity key={index} className="items-center justify-center rounded-full w-10 h-10 p-1">
                     <Text className="font-bold">{dayOfWeek}</Text>
                     <Text>{day.getDate()}</Text>
                   </TouchableOpacity>

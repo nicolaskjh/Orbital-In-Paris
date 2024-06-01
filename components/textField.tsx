@@ -11,10 +11,12 @@ type TextFieldProps = {
 
 const TextField = ( {placeholder, value, secureEntry, border, onChangeText}: TextFieldProps ) => {
   const borders = border === "full" ? "border rounded-full p-2 pl-2" : "border-b";
+  const width = border === "full" ? "w-4/5" : "w-3/4";
+  const height = border === "full" ? "h-10" : ""
 
   return (
     <TextInput 
-      className={`w-3/4 m-2 ${borders}`}
+      className={`m-2 ${height} ${width} ${borders}`}
       autoCapitalize="none"
       placeholder={placeholder}
       placeholderTextColor="grey"

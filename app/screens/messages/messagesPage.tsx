@@ -1,11 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
-import NavigationBar from '@/components/navigationBar';
+import Header from '@/components/header';
+import TextField from '@/components/textField';
 import Messages from '../messages/components/messages';
+import Button from '@/components/button';
+import NavigationBar from '@/components/navigationBar';
 
 const MessagesPage = () => {
   return (
-    <View className="flex-1 flex-col justify-between items-center pt-24 bg-white">
+    <View className="flex-1 flex-col justify-between items-center pt-16 bg-white">
+      <Header text="Chats" size="lg"/>
       <Messages/>
       <NavigationBar/>
     </View>

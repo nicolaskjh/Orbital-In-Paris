@@ -9,12 +9,11 @@ const Messages = () => {
   ]
 
   return (
-    <ScrollView className="flex flex-col w-full h-4/5 bg-white border-t">
+    <ScrollView className="flex flex-col w-full bg-white border-t border-grey">
       {messages.map((message) => {
         return (
           <MessageBar key={message.id} name={message.name} message={message.message}/>
       )})}
-      <Text className="text-lg font-bold text-black">Placeholder</Text>
     </ScrollView>
   );
 }

@@ -21,7 +21,7 @@ const NewTripPage = () => {
         <TextField placeholder="Country" value={country} onChangeText={setCountry}/>
         <TextField placeholder="City" value={city} onChangeText={setCity}/>
         <TextField placeholder="Start Date (YYYY-MM-DD)" value={startDate} onChangeText={setStartDate}/>
-        <TextField placeholder="End Date (YYYY-NM-DD)" value={endDate} onChangeText={setEndDate}/>
+        <TextField placeholder="End Date (YYYY-MM-DD)" value={endDate} onChangeText={setEndDate}/>
       </View>
       <View className="flex h-1/6 w-full items-center">
         <Button text="Create Trip" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => router.replace('trip')}/>
