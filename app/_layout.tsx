@@ -142,6 +142,20 @@ function RootLayoutNav() {
           gestureEnabled: false,
         }}
       />
+      <Stack.Screen
+        name="itinerary"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="newTrip"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
       </Stack>
     </ThemeProvider>
   );

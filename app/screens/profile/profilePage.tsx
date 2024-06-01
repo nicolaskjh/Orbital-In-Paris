@@ -25,13 +25,13 @@ const ProfilePage = ( {name}: ProfilePageProps ) => {
         <ProfilePicture/>
         <Header text="Javier" size="xl"/>
       </View>
-      <View className="flex flex-col h-1/2 pl-4">
-        <Header text="Date of Birth:" size='lg'/>
-        <Text className="pl-4">01.01.2001</Text>
-        <Header text="Country:" size='lg'/>
-        <Text className="pl-4">Singapore</Text>
-        <Header text="Interests:" size='lg'/>
-        <Text className="pl-4">Zazu</Text>
+      <View className="flex flex-col h-1/2">
+        <Header text="Date of Birth:" size='lg' padding='left'/>
+        <Text className="pl-8">01.01.2001</Text>
+        <Header text="Country:" size='lg' padding='left'/>
+        <Text className="pl-8">Singapore</Text>
+        <Header text="Interests:" size='lg' padding='left'/>
+        <Text className="pl-8">Hiking, shopping, food</Text>
       </View>
       <View className='flex flex-col w-full items-center'>
         <Button text="Update Profile" type="plain" textType="normal" size="lg" corners="rounded"/>

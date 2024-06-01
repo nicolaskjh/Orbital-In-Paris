@@ -19,7 +19,7 @@ const UpcomingTrips = () => {
       <ScrollView className="flex w-full">
         {trips.map((trip) => <TripButton key = {trip.key} city = {trip.city} country = {trip.country} duration = {trip.duration}/>)}
       </ScrollView>
-      <Button text="Plan a new trip!" textType="bold" type="plain" size="lg" corners="rounded" onPress={() => router.replace('start')}/>
+      <Button text="Plan a new trip!" textType="bold" type="plain" size="lg" corners="rounded" onPress={() => router.replace('newTrip')}/>
     </View>
   );
 }

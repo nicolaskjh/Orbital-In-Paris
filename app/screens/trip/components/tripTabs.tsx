@@ -15,7 +15,7 @@ const TripTabs = () => {
     {id: 3, name: 'Travel Group', logo: group}
   ]
   return (
-    <View className="flex flex-col items-center h-1/3 w-full">
+    <View className="flex flex-col justify-end items-center h-3/5 w-full">
       {Tabs.map(tab => (
         <TripTab key={tab.id} text={tab.name} icon={tab.logo}/>
       ))}
