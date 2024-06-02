@@ -11,14 +11,22 @@ const UpcomingTrips = () => {
   const router = useRouter();
   const { userId, getToken } = useAuth();
   const [itineraries, setItineraries] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchItineraries = async () => {
+      setIsLoading(true);
+      try {
       const token = await getToken({ template: 'supabase' });
       const itineraries = await getItineraries({userId, token});
       setItineraries(itineraries);
+      } catch (error) {
+        console.error(error);
+      }
     }
     fetchItineraries();
+    setIsLoading(false);
+    console.log(itineraries);
   }, []);
 
   const trips = [
@@ -31,7 +39,7 @@ const UpcomingTrips = () => {
   return (
     <View className="flex flex-col h-1/3 w-full justify-start items-center pb-3">
       <ScrollView className="flex w-full">
-        {itineraries.map((trip) => <TripButton key = {trip.key} city = {trip.city} country = {trip.country} startDate = {trip.start_date} endDate={trip.end_date}/>)}
+        {!isLoading && (itineraries.map((trip) => <TripButton key = {trip.key} city = {trip.city} country = {trip.country} startDate = {trip.start_date} endDate={trip.end_date}/>))}
       </ScrollView>
       <Button text="Plan a new trip!" textType="bold" type="plain" size="lg" corners="rounded" onPress={() => router.replace('newTrip')}/>
     </View>

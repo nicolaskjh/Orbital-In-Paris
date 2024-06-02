@@ -25,8 +25,8 @@ const ExternalLoginButton = ( {icon, strategy} : ExternalLoginButtonProps ) => {
       const { createdSessionId, setActive } = await startOAuthFlow();
 
       if (createdSessionId) {
-        setActive!({ session: createdSessionId });
-        router.push('home');
+        await setActive!({ session: createdSessionId });
+        router.replace('home');
       } 
     } catch (err) {
       console.error('Auth error', err);
