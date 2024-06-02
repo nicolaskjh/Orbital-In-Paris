@@ -4,7 +4,7 @@ import ProfilePicture from '@/components/profilePicture';
 import Header from '@/components/header';
 import Button from '@/components/button';
 import NavigationBar from '@/components/navigationBar';
-import { useAuth } from '@clerk/clerk-expo';
+import { useAuth, useUser } from '@clerk/clerk-expo';
 import { useRouter, Link } from 'expo-router';
 
 type ProfilePageProps = {
@@ -14,6 +14,7 @@ type ProfilePageProps = {
 const ProfilePage = ( {name}: ProfilePageProps ) => {
   const router = useRouter();
   const {signOut, isSignedIn} = useAuth();
+  const {user} = useUser();
 
   if (!isSignedIn) {
     router.replace('/');
@@ -23,7 +24,7 @@ const ProfilePage = ( {name}: ProfilePageProps ) => {
     <View className="flex-1 justify-between pt-24 bg-white">
       <View className="flex flex-row items-center pl-4">
         <ProfilePicture/>
-        <Header text="Javier" size="xl"/>
+        <Header text={`${user?.username == null ? "Update your username!" : user.username}`} size="xl"/>
       </View>
       <View className="flex flex-col h-1/2">
         <Header text="Date of Birth:" size='lg' padding='left'/>
