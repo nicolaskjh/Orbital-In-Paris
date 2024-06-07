@@ -17,7 +17,7 @@ const Button = ({ type, size, text, textType, corners, onPress }: ButtonProps) =
     const height = size === "sm" ? "h-10" : size === "md" ? "h-10" : size === "lg" ? "h-10": size === "fit" ? "h-fit": "h-10";
     const borderColour = type === "borderless" ? "border-transparent" : "border-black";
     const corner = corners === "rounded" ? "rounded-full" : "rounded";
-    const padding = size === "fit" ? "p-1" : "p-2";
+    const padding = size === "fit" ? "" : "p-2";
 
     return (
         <TouchableOpacity

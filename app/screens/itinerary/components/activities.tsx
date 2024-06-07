@@ -1,30 +1,20 @@
 import React from "react";
 import { View, ScrollView, Text } from "react-native";
-import Button from "@/components/button";
+import Activity from "./activity";
 
 const Activities = () => {
-
+  const itinerary = [
+    {id: 0, time: "09:00", activity: "Flight from Singapore to Paris"},
+    {id: 1, time: "18:00", activity: "Check in at Hotel"},
+  ]
 
   return (
     <ScrollView className="flex flex-col w-full bg-white border-t">
-      <View className="flex flex-row w-full items-center justify-between px-6 pt-2 bg-white">
-        <View className="flex w-1/5 items-center border-r">
-          <Text className="text-lg">08:00</Text>
-        </View>
-        <View className="flex w-3/5">
-          <Text className="text-lg font-bold">Activity</Text>
-        </View>
-        <Button text="Edit" type="borderless" textType="normal" size="fit" corners="rounded"/>
-      </View>
-      <View className="flex flex-row w-full items-center justify-between px-6 pt-2 bg-white">
-        <View className="flex w-1/5 items-center border-r">
-          <Text className="text-lg">12:00</Text>
-        </View>
-        <View className="flex w-3/5">
-          <Text className="text-lg font-bold">Activity</Text>
-        </View>
-        <Button text="Edit" type="borderless" textType="normal" size="fit" corners="rounded"/>
-      </View>
+      {itinerary.map((item) => {
+        return(
+          <Activity key={item.id} time={item.time} activity={item.activity}/>
+        )
+      })}
     </ScrollView>
   );
 };
