@@ -7,7 +7,12 @@ import { getItineraries } from "@/utils/supabaseRequests";
 import { useAuth } from "@clerk/clerk-expo";
 import { useEffect, useState } from "react";
 
-const UpcomingTrips = () => {
+type UpcomingTripsProps = {
+  isPopupVisible: boolean;
+  setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const UpcomingTrips = ({ isPopupVisible, setPopupVisible }: UpcomingTripsProps) => {
   const router = useRouter();
   const { userId, getToken } = useAuth();
   const [itineraries, setItineraries] = useState([]);
@@ -41,7 +46,7 @@ const UpcomingTrips = () => {
       <ScrollView className="flex w-full">
         {!isLoading && (itineraries.map((trip) => <TripButton key = {trip.key} city = {trip.city} country = {trip.country} startDate = {trip.start_date} endDate={trip.end_date}/>))}
       </ScrollView>
-      <Button text="Plan a new trip!" textType="bold" type="plain" size="lg" corners="rounded" onPress={() => router.replace('newTrip')}/>
+      <Button text="Plan a new trip!" textType="bold" type="plain" size="lg" corners="rounded" onPress={() => setPopupVisible(!isPopupVisible)}/>
     </View>
   );
 }

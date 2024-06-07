@@ -20,7 +20,7 @@ const dates = eachWeekOfInterval({
 
 const DateSlider = () => {
   return (
-    <PagerView style={{height: "60%"}}>
+    <PagerView style={{marginVertical: 10, height: "5%"}}>
       {dates.map((week, index) => {
         return ( 
           <View key={index}>
