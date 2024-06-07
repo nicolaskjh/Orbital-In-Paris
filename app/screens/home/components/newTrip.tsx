@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { createItinerary } from 'utils/supabaseRequests';
 import { useAuth } from '@clerk/clerk-expo';
 
+
 type NewTripProps = {
   isPopupVisible: boolean;
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,7 +34,6 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
       endDate
     }
     const iti = await createItinerary({userId, token, itinerary});
-    console.log(iti);
     router.replace('home');
   }
 

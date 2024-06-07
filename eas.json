@@ -8,7 +8,16 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
+      },
+      "env": {
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "",
+        "EXPO_PUBLIC_REACT_NATIVE_SUPABASE_URL": "",
+        "EXPO_PUBLIC_REACT_NATIVE_SUPABASE_ANON_KEY": ""
+      }
     },
     "production": {}
   },

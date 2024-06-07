@@ -3,19 +3,36 @@ import { View } from "react-native";
 import TextField from "@/components/textField";
 import Modal from "react-native-modal";
 import Button from "@/components/button";
+import { useAuth } from "@clerk/clerk-expo";
+import { useRouter } from "expo-router";
+
+import { createNewActivity } from 'utils/supabaseRequests';
 
 type NewActivityProps = {
   isPopupVisible: boolean;
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  trip: any;
 };
 
-const NewActivity = ({ isPopupVisible, setPopupVisible }: NewActivityProps) => {
+const NewActivity = ({ isPopupVisible, setPopupVisible, trip }: NewActivityProps) => {
+  const router = useRouter();
   const [activity, setActivity] = React.useState("");
   const [location, setLocation] = React.useState("");
   const [time, setTime] = React.useState("");
   const [date, setDate] = React.useState(""); 
+  const { getToken } = useAuth();
 
-  const addNewActivity = () => {
+  const addNewActivity = async () => {
+    const token = await getToken({ template: 'supabase' });
+    const newActivity = {
+      activity,
+      location,
+      time,
+      date,
+      trip
+    }
+    const act = await createNewActivity({token, newActivity});
+    router.replace({pathname: 'itinerary', params: trip});
     return (
       setPopupVisible(!isPopupVisible)
     );

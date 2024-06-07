@@ -7,7 +7,7 @@ const budget = require('@/assets/images/trip-page/budget.png');
 const flight = require('@/assets/images/trip-page/flight.png');
 const group = require('@/assets/images/trip-page/group.png');
 
-const TripTabs = () => {
+const TripTabs = ({trips}) => {
   const Tabs = [
     {id: 0, name: 'Itinerary', logo: itinerary, path: 'itinerary'},
     {id: 1, name: 'Budget', logo: budget, path: 'budget'},
@@ -18,7 +18,7 @@ const TripTabs = () => {
   return (
     <View className="flex flex-col justify-end items-center h-3/5 w-full">
       {Tabs.map(tab => (
-        <TripTab key={tab.id} text={tab.name} icon={tab.logo} path={tab.path}/>
+        <TripTab key={tab.id} text={tab.name} icon={tab.logo} path={tab.path} trips = {trips}/>
       ))}
     </View>
   );
