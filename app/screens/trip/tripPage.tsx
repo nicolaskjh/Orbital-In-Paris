@@ -10,7 +10,7 @@ const background = require('@/assets/images/background.png')
 const TripPage = () => {  
   return (
     <ImageBackground source={background} className="flex-1 flex-col justify-between bg-fixed bg-cover">
-      <TripHeader/>
+      <TripHeader city="Paris" country="France" startDate="14 Jun" endDate="30 Jun"/>
       <TripTabs/>
       <View className='flex items-center w-full'>
         <Button text="Edit Trip" type="plain" textType="bold" corners="rounded" size="lg"/>

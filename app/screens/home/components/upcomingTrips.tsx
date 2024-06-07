@@ -44,7 +44,7 @@ const UpcomingTrips = ({ isPopupVisible, setPopupVisible }: UpcomingTripsProps) 
   return (
     <View className="flex flex-col h-1/3 w-full justify-start items-center pb-3">
       <ScrollView className="flex w-full">
-        {!isLoading && (itineraries.map((trip) => <TripButton key = {trip.key} city = {trip.city} country = {trip.country} startDate = {trip.start_date} endDate={trip.end_date}/>))}
+        {!isLoading && (itineraries.map((trip) => <TripButton key = {trip.id} city = {trip.city} country = {trip.country} startDate = {trip.start_date} endDate={trip.end_date}/>))}
       </ScrollView>
       <Button text="Plan a new trip!" textType="bold" type="plain" size="lg" corners="rounded" onPress={() => setPopupVisible(!isPopupVisible)}/>
     </View>

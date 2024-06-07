@@ -16,7 +16,7 @@ const ItineraryPage = () => {
 
   return (
     <View className="flex flex-col justify-between h-full bg-white">
-      <TripHeader/>
+      <TripHeader city="Paris" country="France" startDate="14 Jun" endDate="30 Jun"/>
       <DateSlider/>
       <Activities/>
       <NewActivity isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>

@@ -4,17 +4,19 @@ import Button from "@/components/button";
 
 type ActivityProps = {
   time: String,
+  location: String,
   activity: String
 }
 
-const Activity = ( {time, activity} : ActivityProps ) => {
+const Activity = ( {time, location, activity} : ActivityProps ) => {
   return (
-    <View className="flex flex-row w-full items-center justify-between px-6 pt-2 bg-white">
-      <View className="flex w-1/5 items-center border-r">
-        <Text className="text-base">{time}</Text>
+    <View className="flex flex-row w-full items-center justify-between px-4 pt-2 bg-white">
+      <View className="flex w-1/6 items-center border-r">
+        <Text className="text-base font-bold">{time}</Text>
       </View>
-      <View className="flex w-3/5">
-        <Text className="text-base">{activity}</Text>
+      <View className="flex flex-col w-2/3">
+        <Text className="text-base font-bold">{location}</Text>
+        <Text className="text-sm">{activity}</Text>
       </View>
       <Button text="Edit" type="borderless" textType="normal" size="fit" corners="rounded"/>
   </View>
