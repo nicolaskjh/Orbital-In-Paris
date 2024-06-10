@@ -40,7 +40,7 @@ const Activities = ({trips, selectedDay, tripStart, refreshToken}: ActivitiesPro
   return (
     <View className="flex-1 border-t">
       <ScrollView className="flex flex-col w-full bg-white">
-      {!isLoading && activities && activities.length != 0 && (
+      {!isLoading && activities && activities[differenceInCalendarDays(selectedDay, tripStart)].activities.length != 0 ? (
         activities[differenceInCalendarDays(selectedDay, tripStart)].activities.sort((a, b) => {
           const [hoursA, minutesA, secondsA] = a.time.split(":").map(Number);
           const [hoursB, minutesB, secondsB] = b.time.split(":").map(Number);
@@ -53,7 +53,10 @@ const Activities = ({trips, selectedDay, tripStart, refreshToken}: ActivitiesPro
             return secondsA - secondsB;
           }
         }).map((trip) => 
-        <Activity key = {trip.id} time = {trip.time} location = {trip.location} activity = {trip.activity}/>))}
+        <Activity key = {trip.id} time = {trip.time} location = {trip.location} activity = {trip.activity}/>)
+        ) : !isLoading ? (
+        <Text className="text-center text-gray-500 mt-4">No activities planned for the day</Text>
+        ) : null}
       </ScrollView>
     </View>
   );

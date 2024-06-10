@@ -4,17 +4,17 @@ import TextField from "@/components/textField";
 import Modal from "react-native-modal";
 import Button from "@/components/button";
 import { useAuth } from "@clerk/clerk-expo";
-
+import { parseISO } from "date-fns";
 import { createNewActivity } from 'utils/supabaseRequests';
 
 type NewActivityProps = {
   isPopupVisible: boolean;
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
   trip: any;
-  onActivitySubmit: any;
+  onActivitySubmit: (date: Date) => void;
 };
 
-const NewActivity = ({isPopupVisible, setPopupVisible, trip , onActivitySubmit}: NewActivityProps) => {
+const NewActivity = ({isPopupVisible, setPopupVisible, trip, onActivitySubmit}: NewActivityProps) => {
   const [activity, setActivity] = React.useState("");
   const [location, setLocation] = React.useState("");
   const [time, setTime] = React.useState("");
@@ -32,7 +32,7 @@ const NewActivity = ({isPopupVisible, setPopupVisible, trip , onActivitySubmit}:
     }
 
     const act = await createNewActivity({token, newActivity});
-    onActivitySubmit();
+    onActivitySubmit(parseISO(date));
 
     setActivity("");
     setLocation("");
@@ -44,13 +44,22 @@ const NewActivity = ({isPopupVisible, setPopupVisible, trip , onActivitySubmit}:
     );
   }
 
+  const exitPopup = () => {
+    setPopupVisible(!isPopupVisible);
+
+    setActivity("");
+    setLocation("");
+    setTime("");
+    setDate("");
+  }
+
   return (
     <View className="flex flex-col justify-between items-center w-full bg-white">
       <Modal isVisible={isPopupVisible}>
         <View className="flex justify-center items-center h-full">
           <View className="flex flex-col justify-between items-center h-1/3 w-4/5 pb-5 bg-white rounded-xl">
             <View className="flex flex-row w-full justify-end px-1">
-              <Button text="X" type="borderless" textType="bold" size="fit" corners="rounded" onPress={() => setPopupVisible(!isPopupVisible)}/>
+              <Button text="X" type="borderless" textType="bold" size="fit" corners="rounded" onPress={() => exitPopup()}/>
             </View>
             <TextField placeholder="Activity" value={activity} border="bottom" secureEntry={false} onChangeText={(activity) => setActivity(activity)}/>
             <TextField placeholder="Location" value={location} border="bottom" secureEntry={false} onChangeText={(location) => setLocation(location)}/>
