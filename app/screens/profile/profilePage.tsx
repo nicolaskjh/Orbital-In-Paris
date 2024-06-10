@@ -35,8 +35,8 @@ const ProfilePage = ( {name}: ProfilePageProps ) => {
         <Text className="pl-8">Hiking, shopping, food</Text>
       </View>
       <View className='flex flex-col w-full items-center'>
-        <Button text="Update Profile" type="plain" textType="normal" size="lg" corners="rounded"/>
-        <Button text="Log Out" type="borderless" textType="normal" size="lg" corners="squared" onPress={()=> signOut()}/>
+        <Button text="Update Profile" type="plain" textType="normal" size="lg" corners="rounded" onPress={() => router.replace('onboarding')}/>
+        <Button text="Log Out" type="borderless" textType="normal" size="lg" corners="squared" onPress={() => signOut()}/>
       </View>
       {!isSignedIn &&
           <Link href={'/index'}>

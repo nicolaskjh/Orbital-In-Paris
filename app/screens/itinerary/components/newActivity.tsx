@@ -81,7 +81,7 @@ const NewActivity = ({isPopupVisible, setPopupVisible, trip, onActivitySubmit}: 
               <TextField placeholder="Location" value={location} border="bottom" secureEntry={false} onChangeText={(location) => setLocation(location)}/>
               <TextField placeholder="Date (YYYY-MM-DD)" value={date} border="bottom" secureEntry={false} onChangeText={(date) => setDate(date)}/>
               <TextField placeholder="Time (24h)" value={time} border="bottom" secureEntry={false} onChangeText={(time) => setTime(time)}/>
-              {/* {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null} */}
+              {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null}
             </View>
             <Button text="Add Activity" type="plain" textType="bold" size="lg" corners="rounded" onPress={addNewActivity}/>
           </View>
