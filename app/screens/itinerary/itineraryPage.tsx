@@ -29,7 +29,7 @@ const ItineraryPage = () => {
       <TripHeader city={trip.city} country={trip.country} startDate={formatDate(trip.start_date)} endDate={formatDate(trip.end_date)}/>
       <DateSlider/>
       <Activities trips = {trip} refreshToken= {refreshKey}/>
-      <NewActivity isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} trip={trip}/>
+      <NewActivity isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} trip={trip} onActivitySubmit={() => setRefreshKey(oldKey => oldKey + 1)}/>
       <View className="flex flex-row w-full px-8 py-2 justify-between">
         <Button text="Generate New Itinerary" type="plain" textType="bold" size="lg" corners="rounded"/>
         <Button text="+" type="black" textType="bold" size="circle" corners="rounded" onPress={handleNewActivityPress}/>
