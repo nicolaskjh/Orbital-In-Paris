@@ -6,7 +6,8 @@ export const getItineraries = async ({userId,token}) => {
     const {data,error}  = await supabase
         .from('itinerary')
         .select('*')
-        .eq('owner', userId);
+        .eq('owner', userId)
+        .order('start_date', {ascending: true});
     return data;
 }
 
@@ -15,7 +16,8 @@ export const getItinerariesFromId = async ({id,token}) => {
     const {data,error}  = await supabase
         .from('itinerary')
         .select('*')
-        .eq('id', id);
+        .eq('id', id)
+        .order('start_date', {ascending: true});
     return data;
 }
 
@@ -64,6 +66,9 @@ export const createNewActivity = async ({token,newActivity}) => {
 
 export const getActivities = async ({token,trip}) => {
     const supabase = await supabaseClient(token);
-    const {data,error} = await supabase.from('days').select('activities(*)').eq('itinerary',trip);
+    const {data,error} = await supabase
+        .from('days')
+        .select('activities(*)')
+        .eq('itinerary',trip);
     return data;
 }

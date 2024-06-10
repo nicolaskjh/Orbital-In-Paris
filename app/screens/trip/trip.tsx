@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground ,Text} from 'react-native';
+import { View, ImageBackground } from 'react-native';
 import TripHeader from '@/components/tripHeader';
 import TripTabs from './components/tripTabs';
 import Button from '@/components/button';

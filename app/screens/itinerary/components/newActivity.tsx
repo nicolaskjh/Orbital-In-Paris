@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import TextField from "@/components/textField";
 import Modal from "react-native-modal";
 import Button from "@/components/button";
@@ -19,9 +19,23 @@ const NewActivity = ({isPopupVisible, setPopupVisible, trip, onActivitySubmit}: 
   const [location, setLocation] = React.useState("");
   const [time, setTime] = React.useState("");
   const [date, setDate] = React.useState(""); 
+  const [errorMessage, setErrorMessage] = React.useState("");
   const { getToken } = useAuth();
 
   const addNewActivity = async () => {
+    setErrorMessage("");
+
+    if (activity === "" || location === "" || time === "" || date === "") {
+      setErrorMessage("Please fill in all fields");
+      return;
+    }
+
+    const parsedDate = parseISO(date);
+    if (parsedDate < parseISO(trip.start_date) || parsedDate > parseISO(trip.end_date)) {
+      setErrorMessage("Date must be within trip duration");
+      return;
+    }
+
     const token = await getToken({ template: 'supabase' });
     const newActivity = {
       activity,
@@ -51,6 +65,7 @@ const NewActivity = ({isPopupVisible, setPopupVisible, trip, onActivitySubmit}: 
     setLocation("");
     setTime("");
     setDate("");
+    setErrorMessage("");
   }
 
   return (
@@ -61,10 +76,13 @@ const NewActivity = ({isPopupVisible, setPopupVisible, trip, onActivitySubmit}: 
             <View className="flex flex-row w-full justify-end px-1">
               <Button text="X" type="borderless" textType="bold" size="fit" corners="rounded" onPress={() => exitPopup()}/>
             </View>
-            <TextField placeholder="Activity" value={activity} border="bottom" secureEntry={false} onChangeText={(activity) => setActivity(activity)}/>
-            <TextField placeholder="Location" value={location} border="bottom" secureEntry={false} onChangeText={(location) => setLocation(location)}/>
-            <TextField placeholder="Date (YYYY-MM-DD)" value={date} border="bottom" secureEntry={false} onChangeText={(date) => setDate(date)}/>
-            <TextField placeholder="Time (24h)" value={time} border="bottom" secureEntry={false} onChangeText={(time) => setTime(time)}/>
+            <View className="flex flex-col h-3/5 w-full justify-start items-center">
+              <TextField placeholder="Activity" value={activity} border="bottom" secureEntry={false} onChangeText={(activity) => setActivity(activity)}/>
+              <TextField placeholder="Location" value={location} border="bottom" secureEntry={false} onChangeText={(location) => setLocation(location)}/>
+              <TextField placeholder="Date (YYYY-MM-DD)" value={date} border="bottom" secureEntry={false} onChangeText={(date) => setDate(date)}/>
+              <TextField placeholder="Time (24h)" value={time} border="bottom" secureEntry={false} onChangeText={(time) => setTime(time)}/>
+              {/* {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null} */}
+            </View>
             <Button text="Add Activity" type="plain" textType="bold" size="lg" corners="rounded" onPress={addNewActivity}/>
           </View>
         </View>

@@ -149,6 +149,13 @@ function RootLayoutNav() {
           gestureEnabled: false,
         }}
       />
+      <Stack.Screen
+        name="group"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
       </Stack>
     </ThemeProvider>
   );
