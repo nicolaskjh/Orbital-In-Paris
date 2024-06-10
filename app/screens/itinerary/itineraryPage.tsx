@@ -8,6 +8,8 @@ import Button from '@/components/button';
 import NavigationBar from '@/components/navigationBar';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { parseISO, format } from "date-fns";
+import {claudePromptRequest} from 'utils/claudePromptRequest';
+import { useAuth } from '@clerk/clerk-expo';
 
 const ItineraryPage = () => {
   const router = useRouter();
@@ -15,10 +17,20 @@ const ItineraryPage = () => {
   const [isPopupVisible, setPopupVisible] = React.useState(false);
   const [refreshKey, setRefreshKey] = React.useState(0);
   const [date, setDate] = React.useState(parseISO(trip.start_date));
+  const {getToken} = useAuth();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleNewActivityPress = () => {
     setPopupVisible(!isPopupVisible);
   };
+
+  const handleClaudePrompt = async (trip) => {
+    setIsLoading(true);
+    const token = await getToken({ template: 'supabase' });
+    await claudePromptRequest({trip, token});
+    setRefreshKey(oldKey => oldKey + 1);
+    setIsLoading(false);
+  }
 
   const formatDate = (dateString: string) => {
     const date = parseISO(dateString);
@@ -32,7 +44,7 @@ const ItineraryPage = () => {
       <Activities trips={trip} selectedDay={date} tripStart={parseISO(trip.start_date)} refreshToken={refreshKey}/>
       <NewActivity isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} trip={trip} onActivitySubmit={() => setRefreshKey(oldKey => oldKey + 1)}/>
       <View className="flex flex-row w-full px-8 py-2 justify-between">
-        <Button text="Generate New Itinerary" type="plain" textType="bold" size="lg" corners="rounded"/>
+        <Button text="Generate New Itinerary" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => handleClaudePrompt(trip)}/>
         <Button text="+" type="black" textType="bold" size="circle" corners="rounded" onPress={handleNewActivityPress}/>
       </View>
       <NavigationBar/>
