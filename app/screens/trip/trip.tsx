@@ -16,6 +16,7 @@ const TripPage = () => {
     const date = parseISO(dateString);
     return format(date, 'd MMM');
   };
+  
   return (
     <ImageBackground source={background} className="flex-1 flex-col justify-between bg-fixed bg-cover">
       <TripHeader city={trip.city} country= {trip.country} startDate={formatDate(trip.start_date)} endDate={formatDate(trip.end_date)}/>

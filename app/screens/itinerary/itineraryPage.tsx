@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import TripHeader from '@/components/tripHeader';
-import DateSlider from './components/dateSlider';
+import WeekCalendar from './components/weekCalendar';
 import Activities from './components/activities';
 import NewActivity from './components/newActivity';
 import Button from '@/components/button';
@@ -14,6 +14,7 @@ const ItineraryPage = () => {
   const trip = useLocalSearchParams();
   const [isPopupVisible, setPopupVisible] = React.useState(false);
   const [refreshKey, setRefreshKey] = React.useState(0);
+  const [date, setDate] = React.useState(parseISO(trip.start_date));
 
   const handleNewActivityPress = () => {
     setPopupVisible(!isPopupVisible);
@@ -27,8 +28,8 @@ const ItineraryPage = () => {
   return (
     <View className="flex flex-col justify-between h-full bg-white">
       <TripHeader city={trip.city} country={trip.country} startDate={formatDate(trip.start_date)} endDate={formatDate(trip.end_date)}/>
-      <DateSlider/>
-      <Activities trips = {trip} refreshToken= {refreshKey}/>
+      <WeekCalendar date={date} tripStart={parseISO(trip.start_date)} tripEnd={parseISO(trip.end_date)} onSelectDate={(newDate) => setDate(newDate)}/>
+      <Activities trips={trip} selectedDay={date} tripStart={parseISO(trip.start_date)} refreshToken={refreshKey}/>
       <NewActivity isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} trip={trip} onActivitySubmit={() => setRefreshKey(oldKey => oldKey + 1)}/>
       <View className="flex flex-row w-full px-8 py-2 justify-between">
         <Button text="Generate New Itinerary" type="plain" textType="bold" size="lg" corners="rounded"/>
