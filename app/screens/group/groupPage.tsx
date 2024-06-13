@@ -4,6 +4,7 @@ import TripHeader from '@/components/tripHeader';
 import Header from '@/components/header';
 import GroupMembers from './components/groupMembers';
 import Button from '@/components/button';
+import Invite from './components/invite';
 import NavigationBar from '@/components/navigationBar';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { parseISO, format } from "date-fns";
@@ -11,6 +12,7 @@ import { parseISO, format } from "date-fns";
 const GroupPage = () => {
   const router = useRouter();
   const trip = useLocalSearchParams();
+  const [isPopupVisible, setPopupVisible] = React.useState(false);
   
   const formatDate = (dateString: string) => {
     const date = parseISO(dateString);
@@ -25,9 +27,10 @@ const GroupPage = () => {
       </View>
       <GroupMembers/>
       <View className="flex flex-col w-full items-center justify-center py-1">
-        <Button text="Invite friends to this trip" type="plain" textType="bold" corners="rounded" size="lg"/>
+        <Button text="Invite friends to this trip" type="plain" textType="bold" corners="rounded" size="lg" onPress={() => setPopupVisible(!isPopupVisible)}/>
         <Button text="Find other solo travellers" type="plain" textType="bold" corners="rounded" size="lg"/>
       </View>
+      <Invite isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
       <NavigationBar/>
     </View>
   );

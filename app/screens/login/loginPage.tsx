@@ -7,7 +7,6 @@ import ForgotPassword from "./components/forgotPassword";
 import Button from "@/components/button";
 import { useSignIn } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
-import ExternalLogin from "../start/components/externalLogin";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -46,7 +45,6 @@ const LoginPage = () => {
           <ForgotPassword/>
           <Button type="plain" text="Login" textType="normal" size="sm" corners="rounded" onPress={onLoginPress}/>
         </View>
-        <ExternalLogin/>
         <Button type="borderless" text="Don't have an account?" textType="normal" size="lg" corners="rounded" onPress={() => router.replace('signup')}/>
       </View>  
     </View>

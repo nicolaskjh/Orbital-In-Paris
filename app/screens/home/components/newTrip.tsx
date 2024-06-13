@@ -22,7 +22,9 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
   const[startDate, setStartDate] = useState("");
   const[endDate, setEndDate] = useState("");
   const[errorMessage, setErrorMessage] = useState("");
+  const[inviteCode, setInviteCode] = useState("");
   const {userId, getToken} = useAuth();
+  const [newTrip, setNewTrip] = useState(true);
 
   const handleCreateNewItinerary = async () => {
     setErrorMessage("");
@@ -50,9 +52,14 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
     router.replace('home');
   }
 
+  const changeTripType = () => {
+    setNewTrip(!newTrip);
+    setErrorMessage("");
+  }
+
   const exitPopup = () => {
     setPopupVisible(!isPopupVisible);
-
+    setNewTrip(true);
     setCountry("");
     setCity("");
     setStartDate("");
@@ -64,21 +71,40 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
     <View className="flex flex-col justify-between items-center w-full bg-white">
       <Modal isVisible={isPopupVisible}>
         <View className="flex justify-center items-center h-full">
-            <View className="flex flex-col justify-between items-center h-1/3 w-5/6 pb-5 bg-white rounded-xl">
+            <View className="flex flex-col justify-between items-center h-2/5 w-5/6 pb-5 bg-white rounded-xl">
               <View className="flex flex-row w-full justify-end px-1">
                 <Button text="X" type="borderless" textType="bold" size="fit" corners="rounded" onPress={exitPopup}/>
               </View>
-            <Header text="Plan a New Trip!" size="xl" padding="none" verticalPadding={false}/>
-            <View className="flex flex-col h-3/5 w-full items-center">
-              <TextField placeholder="Country" value={country} onChangeText={setCountry}/>
-              <TextField placeholder="City" value={city} onChangeText={setCity}/>
-              <TextField placeholder="Start Date (YYYY-MM-DD)" value={startDate} onChangeText={setStartDate}/>
-              <TextField placeholder="End Date (YYYY-MM-DD)" value={endDate} onChangeText={setEndDate}/>
-              {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null}
-            </View>
-            <View className="flex h-1/6 w-full items-center">
-              <Button text="Create Trip" type="plain" textType="bold" size="lg" corners="rounded" onPress={handleCreateNewItinerary}/>
-            </View>
+            {newTrip ? (
+              <> 
+                <Header text="Plan a New Trip!" size="xl" padding="none" verticalPadding={false}/>
+                <View className="flex flex-col h-1/2 w-full items-center pt-2">
+                  <TextField placeholder="Country" value={country} onChangeText={setCountry}/>
+                  <TextField placeholder="City" value={city} onChangeText={setCity}/>
+                  <TextField placeholder="Start Date (YYYY-MM-DD)" value={startDate} onChangeText={setStartDate}/>
+                  <TextField placeholder="End Date (YYYY-MM-DD)" value={endDate} onChangeText={setEndDate}/>
+                  {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null}
+                </View>
+                <View className="flex h-1/3 w-full items-center pt-3">
+                  <Button text="Create Trip" type="plain" textType="bold" size="lg" corners="rounded" onPress={handleCreateNewItinerary}/>
+                  <Button text="Already have an invite code?" type="borderless" size="fit" onPress={changeTripType}/>
+                </View>  
+              </>
+            ) : (
+              <>
+                <Header text="Join a Trip!" size="xl" padding="none" verticalPadding={false}/>
+                <View className="flex flex-col h-1/2 w-full justify-center items-center pt-2">
+                  <TextField placeholder="Invite Code" value={inviteCode} onChangeText={setInviteCode}/>
+                  {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null}
+                </View>
+                <View className="flex h-1/3 w-full items-center pt-3">
+                  <Button text="Join Trip" type="plain" textType="bold" size="lg" corners="rounded"/>
+                  <Button text="Create a new trip instead" type="borderless" size="fit" onPress={changeTripType}/>
+                </View>
+              </>
+          )}
+            
+
           </View>
         </View>
       </Modal>
