@@ -82,7 +82,7 @@ const SignupPage = () => {
           <View className="flex w-full h-2/5 items-center">
             <TextField placeholder="Verification Code" value={code} secureEntry={false} border="bottom" onChangeText={(code) => setCode(code)}/>
             <View className="flex w-3/4 items-end">
-              <Button type="plain" text="Verify Email" textType="normal" size="fit" corners="rounded" onPress={onPressVerify}/>
+              <Button type="plain" text="Verify Email" textType="normal" size="fitPadding" corners="rounded" onPress={onPressVerify}/>
             </View>
           </View>
         </View>
