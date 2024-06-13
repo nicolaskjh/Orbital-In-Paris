@@ -16,10 +16,6 @@ const HomePage = () => {
   const [ profile, setProfile ] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const handleNewTripPress = () => {
-    setPopupVisible(!isPopupVisible);
-  };
-
   const {userId, getToken} = useAuth();
   useEffect(() => {
     const fetchProfile = async () => {
@@ -37,11 +33,15 @@ const HomePage = () => {
 
   return (
     <ImageBackground source={background} className="flex-1 flex-col justify-between bg-fixed bg-cover">
-      {!isLoading && (<WelcomeMessage name={`${profile[0].name}`}/>)}
-      <Header text="Upcoming Trips" size="xl" padding="left"/>
-      <UpcomingTrips isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
-      <NewTrip isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
-      <NavigationBar/>
+      {!isLoading && (
+        <>
+          <WelcomeMessage name={`${profile[0].name}`}/>
+          <Header text="Upcoming Trips" size="xl" padding="left"/>
+          <UpcomingTrips isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
+          <NewTrip isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
+          <NavigationBar/>
+        </>
+      )}
     </ImageBackground>
   );
 }

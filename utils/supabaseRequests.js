@@ -7,7 +7,6 @@ export const getItineraries = async ({userId,token}) => {
         .from('groups')
         .select('itinerary(*)')
         .eq('user_id', userId)
-
     return data;
 }
 
