@@ -6,6 +6,8 @@ import Button from '@/components/button';
 import TextField from '@/components/textField';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useAuth } from '@clerk/clerk-expo';
+import { createProfile } from '@/utils/supabaseRequests';
 
 const OnboardingPage = () => {
   const router = useRouter();
@@ -13,6 +15,23 @@ const OnboardingPage = () => {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [country, setCountry] = useState(''); 
   const [interests, setInterests] = useState('');
+
+
+  const {userId, getToken} = useAuth(); 
+
+  const handleOnboarding = async () => {
+    const token = await getToken({template: 'supabase'});
+    const profile = {
+      name,
+      dateOfBirth,
+      country,
+      interests,
+      userId
+    };
+
+    const res = await createProfile({token,profile});
+    router.replace("home")
+    }
 
   return (
     <View className="flex flex-col h-full w-full items-center justify-between bg-white pt-20">
@@ -28,7 +47,7 @@ const OnboardingPage = () => {
         <TextField placeholder="Interests" value={interests} onChangeText={(interests) => setInterests(interests)}/>
       </View>
       <View className="flex h-1/3 w-full items-center">
-        <Button text="Complete signup" type="plain" size="lg" corners="rounded" onPress={() => router.replace('home')}/>
+        <Button text="Complete signup" type="plain" size="lg" corners="rounded" onPress={handleOnboarding}/>
       </View>
     </View>
   );

@@ -4,10 +4,10 @@ import { parseISO, differenceInCalendarDays} from "date-fns";
 export const getItineraries = async ({userId,token}) => {
     const supabase = await supabaseClient(token);
     const {data,error}  = await supabase
-        .from('itinerary')
-        .select('*')
-        .eq('owner', userId)
-        .order('start_date', {ascending: true});
+        .from('groups')
+        .select('itinerary(*)')
+        .eq('user_id', userId)
+
     return data;
 }
 
@@ -41,6 +41,13 @@ export const createItinerary = async ({userId,token,itinerary}) => {
             "day": i
         })
     }
+
+    const {data:data2,error:error2} = await supabase
+        .from('groups')
+        .insert({
+            "user_id" : userId,
+            "itinerary" : data[0].id
+        })
     return data;
 }
 
@@ -70,5 +77,28 @@ export const getActivities = async ({token,trip}) => {
         .from('days')
         .select('activities(*)')
         .eq('itinerary',trip);
+    return data;
+}
+
+export const createProfile = async ({token,profile}) => {
+    const supabase = await supabaseClient(token);
+    const {data,error} = await supabase
+        .from('profiles')
+        .insert({
+            "name" : profile.name,
+            "country" : profile.country,
+            "interests" : profile.interests,
+            "dateOfBirth" : profile.dateOfBirth,
+            "user_id" : profile.userId
+        }).select("*")
+    return data;
+}
+
+export const getProfile = async ({userId,token}) => {
+    const supabase = await supabaseClient(token);
+    const {data,error}  = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', userId);
     return data;
 }
