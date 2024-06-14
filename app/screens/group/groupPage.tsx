@@ -25,12 +25,12 @@ const GroupPage = () => {
       <View className="flex w-full items-center">
         <Header text="Members" size="md"/>
       </View>
-      <GroupMembers/>
+      <GroupMembers trip={trip}/>
       <View className="flex flex-col w-full items-center justify-center py-1">
         <Button text="Invite friends to this trip" type="plain" textType="bold" corners="rounded" size="lg" onPress={() => setPopupVisible(!isPopupVisible)}/>
         <Button text="Find other solo travellers" type="plain" textType="bold" corners="rounded" size="lg"/>
       </View>
-      <Invite isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
+      <Invite isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} tripCode = {trip.invite_code}/>
       <NavigationBar/>
     </View>
   );

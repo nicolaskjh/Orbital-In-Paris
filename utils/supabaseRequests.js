@@ -21,6 +21,17 @@ export const getItinerariesFromId = async ({id,token}) => {
 }
 
 export const createItinerary = async ({userId,token,itinerary}) => {
+    function createRandomString() {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let result = "";
+        for (let i = 0; i < 6; i++) {
+          result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    const invitecode = createRandomString();
+      
     const supabase = await supabaseClient(token);
     const {data,error} = await supabase
         .from('itinerary')
@@ -29,7 +40,8 @@ export const createItinerary = async ({userId,token,itinerary}) => {
             "city" : itinerary.city,
             "start_date" : itinerary.startDate,
             "end_date" : itinerary.endDate,
-            "owner" : userId
+            "owner" : userId,
+            "invite_code" : invitecode
             }
         ).select('id');
 
@@ -99,5 +111,32 @@ export const getProfile = async ({userId,token}) => {
         .from('profiles')
         .select('*')
         .eq('user_id', userId);
+    return data;
+}
+
+export const joinInviteCode = async ({token,inviteCode,userId}) => {
+    const supabase = await supabaseClient(token);
+    const {data,error} = await supabase
+        .from('itinerary')
+        .select('id')
+        .eq('invite_code',inviteCode);
+    if (data.length === 0){
+        return "Invalid invite code";
+    }
+    const {data:data2,error:error2} = await supabase
+        .from('groups')
+        .insert({
+            "user_id" : userId,
+            "itinerary" : data[0].id
+        });
+    return data;
+}
+
+export const getMembers = async ({token,trip}) => {
+    const supabase = await supabaseClient(token);
+    const {data,error} = await supabase
+        .from('groups')
+        .select('profiles(*)')
+        .eq('itinerary',trip.id);
     return data;
 }

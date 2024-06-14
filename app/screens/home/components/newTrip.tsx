@@ -6,7 +6,7 @@ import TextField from '@/components/textField';
 import Modal from "react-native-modal";
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { createItinerary } from 'utils/supabaseRequests';
+import { createItinerary, joinInviteCode } from 'utils/supabaseRequests';
 import { useAuth } from '@clerk/clerk-expo';
 import { isBefore, parseISO } from 'date-fns';
 
@@ -49,6 +49,12 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
       endDate
     }
     const iti = await createItinerary({userId, token, itinerary});
+    router.replace('home');
+  }
+
+  const addThroughInvite = async () => {
+    const token = await getToken({ template: 'supabase' });
+    const res = await joinInviteCode ({userId, token, inviteCode});
     router.replace('home');
   }
 
@@ -98,7 +104,7 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
                   {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null}
                 </View>
                 <View className="flex h-1/3 w-full items-center pt-3">
-                  <Button text="Join Trip" type="plain" textType="bold" size="lg" corners="rounded"/>
+                  <Button text="Join Trip" type="plain" textType="bold" size="lg" corners="rounded" onPress={addThroughInvite}/>
                   <Button text="Create a new trip instead" type="borderless" size="fit" onPress={changeTripType}/>
                 </View>
               </>

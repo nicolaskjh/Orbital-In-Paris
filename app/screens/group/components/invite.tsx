@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import Header from '@/components/header';
 import Button from '@/components/button';
 
-const Invite = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
+const Invite = ({ isPopupVisible, setPopupVisible, tripCode }: NewTripProps) => {
  
   const exitPopup = () => {
     setPopupVisible(!isPopupVisible);
@@ -20,7 +20,7 @@ const Invite = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
               </View>
             <Header text="Invite your friends with this code!" size="md" padding="none" verticalPadding={false} textAlign="center"/>
             <View className="flex flex-col h-2/5 w-full items-center py-2">
-              <Text>Placeholder code</Text>
+              <Text>{tripCode}</Text>
             </View>
           </View>
         </View>
