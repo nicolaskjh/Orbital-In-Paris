@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import TripHeader from '@/components/tripHeader';
+import { Dropdown } from 'react-native-element-dropdown';
 import TextField from '@/components/textField';
 import Split from './components/split';
 import Button from '@/components/button';
@@ -19,11 +20,10 @@ const NewExpensePage = () => {
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
   const [isPopupVisible, setPopupVisible] = useState(false);
-
+  const [participants, setParticipants] = useState([]);
   const {userId, getToken} = useAuth();
 
   const handleSaveExpense = async () => {
-    // Save expense
     const token = await getToken({ template: 'supabase' });
     const transaction = {
       userId,
@@ -31,8 +31,10 @@ const NewExpensePage = () => {
       description,
       amount,
       date,
-      itinerary: trip.id
+      itinerary: trip.id,
+      shares: participants
     }
+    console.log(transaction)
     const iti = await addTransaction({token, transaction});
     router.replace({pathname: 'budget', params: trip});
   };
@@ -41,13 +43,30 @@ const NewExpensePage = () => {
     <View className="flex flex-col justify-between h-full w-full bg-white">
       <TripHeader city={trip.city} country={trip.country} startDate={formatDate(trip.start_date)} endDate={formatDate(trip.end_date)}/>
       <View className="flex-1 justify-center items-center px-8 py-2">
-        <TextField placeholder="Category" value={category} onChangeText={(category) => setCategory(category)}/>
+        <Dropdown 
+          style={{width: '80%', borderWidth: 1, borderRadius: 32, borderColor: 'black', marginBottom: 4, paddingHorizontal: 8}}
+          placeholderStyle={{color: 'grey', fontSize: 14, padding: 0}}
+          selectedTextStyle={{color: 'black', fontSize: 14, padding: 0}}
+          placeholder="Category" 
+          value={category} 
+          labelField="label"
+          valueField="value"
+          data={[
+            {label: 'Accommodation', value: 'Accommodation'},
+            {label: 'Transport', value: 'Transport'},
+            {label: 'Food', value: 'Food'},
+            {label: 'Shopping', value: 'Shopping'},
+            {label: 'Settle Dues', value: 'Settle Dues'},
+            {label: 'Others', value: 'Othesr'}
+          ]}
+          onChange={(item) => setCategory(item.value)}
+        />
         <TextField placeholder="Description" value={description} onChangeText={(description) => setDescription(description)}/>
         <TextField placeholder="Amount" value={amount} onChangeText={(amount) => setAmount(amount)}/>
-        <TextField placeholder="Date" value={date} onChangeText={(date) => setDate(date)}/>
-        <Button text="Split Expense" type="plain" size="md" corners="rounded" onPress={() => setPopupVisible(!isPopupVisible)}/>
+        <TextField placeholder="Date (YYYY-MM-DD)" value={date} onChangeText={(date) => setDate(date)}/>
+        <Button text="Split Expenses" type="plain" size="md" corners="rounded" onPress={() => setPopupVisible(!isPopupVisible)}/>
       </View>
-      <Split trip={trip} isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
+      <Split trip={trip} isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} participants={participants} setParticipants={setParticipants}/>
       <View className="flex w-full items-center px-8 py-2">
         <Button text="Save Expense" type="plain" size="lg" corners="rounded" onPress={handleSaveExpense}/>
       </View>

@@ -143,23 +143,58 @@ export const getMembers = async ({token,trip}) => {
 
 export const addTransaction = async ({token,transaction}) => {
     const supabase = await supabaseClient(token);
-    const {data:id,error}  = await supabase
-            .from('profiles')
-            .select('id')
-            .eq('user_id', transaction.userId);
-    const {data,error:error2} = await supabase
+    
+    const { data: profileData, error: profileError } = await supabase
+    .from('profiles')
+    .select('id')
+    .eq('user_id', transaction.userId);
+
+    const payerId = profileData[0].id;
+
+    const { data: transactionData, error: transactionError } = await supabase
         .from('transaction')
         .insert({
-            "payer" : id[0].id,
-            "category" : transaction.category,
-            "amount" : transaction.amount,
-            "description" : transaction.description,
-            "date" : transaction.date,
-            "itinerary" : transaction.itinerary
-        }).select('*');
-    console.log(error);
-    console.log(error2);
-    return data;
+            payer: payerId,
+            category: transaction.category,
+            amount: transaction.amount,
+            description: transaction.description,
+            date: transaction.date,
+            itinerary: transaction.itinerary
+        })
+        .select('*');
+    
+    const transactionId = transactionData[0].id;
+
+    const duesEntries = transaction.shares.map(share => ({
+        lender: payerId,
+        owner: share.user_id,
+        amount_due: share.amount,
+        transaction: transactionId
+    }));
+
+    console.log(duesEntries)
+
+    try {
+        const insertPromises = duesEntries.map(entry =>
+            supabase
+                .from('dues')
+                .insert(entry)
+                .select('*')
+        );
+            const insertResults = await Promise.all(insertPromises);
+
+        insertResults.forEach(result => {
+            if (result.error) {
+                console.error('Error inserting dues:', result.error.message);
+            } else {
+                console.log('Successfully inserted dues:', result.data);            
+            }
+        });
+    } catch (error) {
+    console.error('Error inserting dues:', error.message);
+    }
+
+    return duesData;
 }   
 
 export const getExpenses = async ({token,trip}) => {
@@ -170,4 +205,37 @@ export const getExpenses = async ({token,trip}) => {
         .eq('itinerary',trip.id);
     console.log(data)
     return data;
+}
+
+export const getBalances = async ({token,trip,user}) => {
+    const supabase = await supabaseClient(token);
+    const {data,error} = await supabase
+        .from('dues')
+        .select('id, lender, owner, amount, transaction_id')
+        .eq('itinerary',trip.id);
+    console.log(data)
+
+    let amountOwedByUser = {};
+    let amountOwedToUser = {};
+
+    data.forEach((due) => {
+        if (due.owner === user) {
+            if (due.owner === personA) {
+                if (!amountOwedByUser[due.lender]) {
+                    amountOwedByUser[due.lender] = 0;
+                }
+                amountOwedByUser[due.lender] += due.amount;
+            }
+            if (due.lender === personA) {
+                if (!amountOwedToUser[due.owner]) {
+                    amountOwedToUser[due.owner] = 0;
+                }
+                amountOwedToUser[due.owner] += due.amount;
+            }
+        }});
+
+    return {
+        amountOwedByUser,
+        amountOwedToUser
+    };
 }

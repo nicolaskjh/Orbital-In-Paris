@@ -50,7 +50,7 @@ const BudgetPage = () => {
         <TotalExpenses/>
       )}
       <View className="flex flex-row w-full px-8 py-2 justify-end">
-        <Button text="+" type="black" textType="bold" size="circle" corners="rounded" onPress={() => router.replace({pathname: 'newExpense', params: trip})}/>
+        <Button text="+" type="plain" textType="bold" size="circle" corners="rounded" onPress={() => router.replace({pathname: 'newExpense', params: trip})}/>
       </View>
       <NavigationBar/>
     </View>

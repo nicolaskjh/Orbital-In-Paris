@@ -11,13 +11,14 @@ type SplitProps = {
   trip: any;
   isPopupVisible: boolean;
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  participants: { name: string, amount: string, user_id: string }[];
+  setParticipants: React.Dispatch<React.SetStateAction<{ name: string, amount: string, user_id: string }[]>>;
 };
 
-const Split = ( {trip, isPopupVisible, setPopupVisible}: SplitProps ) => {
+const Split = ( {trip, isPopupVisible, setPopupVisible, participants, setParticipants}: SplitProps ) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [members, setMembers] = React.useState([]);
   const {userId, getToken} = useAuth();
-  const [participants, setParticipants] = useState([]);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -26,11 +27,14 @@ const Split = ( {trip, isPopupVisible, setPopupVisible}: SplitProps ) => {
       const token = await getToken({ template: 'supabase' });
       const members = await getMembers({token,trip});
       setMembers(members);
+      setParticipants(members.map(member => ({name: member.profiles.name, amount: "", user_id: member.profiles.id})));
       } catch (error) {
         console.error(error);
       }
     }
     fetchMembers();
+    console.log(members);
+    console.log(participants);
     setIsLoading(false);
   }, []);
 
@@ -39,7 +43,7 @@ const Split = ( {trip, isPopupVisible, setPopupVisible}: SplitProps ) => {
   }
 
   const saveSplit = () => {
-    // Save split
+    console.log(participants)
     setPopupVisible(!isPopupVisible);
   }
 
@@ -52,7 +56,7 @@ const Split = ( {trip, isPopupVisible, setPopupVisible}: SplitProps ) => {
                 <Button text="X" type="borderless" textType="bold" size="fit" corners="rounded" onPress={exitPopup}/>
               </View>
               <ScrollView className="flex-1 w-full">
-                {members.map((member) => {
+                {!isLoading && members.map((member) => {
                   return (
                     <IndividualExpense key={member.profiles.id} name={member.profiles.name} participants={participants} setParticipants={setParticipants}/>
                 )})}

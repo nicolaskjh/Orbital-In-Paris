@@ -4,10 +4,8 @@ import Header from '@/components/header';
 
 const TotalExpenses = () => {
   return (
-    <View className="flex-1">
-      <ScrollView className="w-full">
-        <Header text="Total Expenses" size="md" padding="left"/>
-      </ScrollView>
+    <View className="flex-1 w-full">
+      <Header text="Total Expenses" size="md" padding="left"/>
     </View>
   );
 }

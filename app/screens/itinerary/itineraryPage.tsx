@@ -48,7 +48,7 @@ const ItineraryPage = () => {
       <LoadingPopup isLoading={isLoading}/>
       <View className="flex flex-row w-full px-8 py-2 justify-between">
         <Button text="Generate New Itinerary" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => handleClaudePrompt(trip)}/>
-        <Button text="+" type="black" textType="bold" size="circle" corners="rounded" onPress={newActivityPress}/>
+        <Button text="+" type="plain" textType="bold" size="circle" corners="rounded" onPress={newActivityPress}/>
       </View>
       <NavigationBar/>
     </View>
