@@ -140,3 +140,34 @@ export const getMembers = async ({token,trip}) => {
         .eq('itinerary',trip.id);
     return data;
 }
+
+export const addTransaction = async ({token,transaction}) => {
+    const supabase = await supabaseClient(token);
+    const {data:id,error}  = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('user_id', transaction.userId);
+    const {data,error:error2} = await supabase
+        .from('transaction')
+        .insert({
+            "payer" : id[0].id,
+            "category" : transaction.category,
+            "amount" : transaction.amount,
+            "description" : transaction.description,
+            "date" : transaction.date,
+            "itinerary" : transaction.itinerary
+        }).select('*');
+    console.log(error);
+    console.log(error2);
+    return data;
+}   
+
+export const getExpenses = async ({token,trip}) => {
+    const supabase = await supabaseClient(token);
+    const {data,error} = await supabase
+        .from('transaction')
+        .select('*,profiles(name)')
+        .eq('itinerary',trip.id);
+    console.log(data)
+    return data;
+}

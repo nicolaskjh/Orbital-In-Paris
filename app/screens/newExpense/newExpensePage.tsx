@@ -8,6 +8,8 @@ import NavigationBar from '@/components/navigationBar';
 import { useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { formatDate } from '@/functions/formatDate';
+import { useAuth } from '@clerk/clerk-react';
+import { addTransaction } from '@/utils/supabaseRequests';
 
 const NewExpensePage = () => {
   const trip = useLocalSearchParams();
@@ -15,10 +17,23 @@ const NewExpensePage = () => {
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
   const [isPopupVisible, setPopupVisible] = useState(false);
 
-  const handleSaveExpense = () => {
+  const {userId, getToken} = useAuth();
+
+  const handleSaveExpense = async () => {
     // Save expense
+    const token = await getToken({ template: 'supabase' });
+    const transaction = {
+      userId,
+      category,
+      description,
+      amount,
+      date,
+      itinerary: trip.id
+    }
+    const iti = await addTransaction({token, transaction});
     router.replace({pathname: 'budget', params: trip});
   };
 
@@ -29,6 +44,7 @@ const NewExpensePage = () => {
         <TextField placeholder="Category" value={category} onChangeText={(category) => setCategory(category)}/>
         <TextField placeholder="Description" value={description} onChangeText={(description) => setDescription(description)}/>
         <TextField placeholder="Amount" value={amount} onChangeText={(amount) => setAmount(amount)}/>
+        <TextField placeholder="Date" value={date} onChangeText={(date) => setDate(date)}/>
         <Button text="Split Expense" type="plain" size="md" corners="rounded" onPress={() => setPopupVisible(!isPopupVisible)}/>
       </View>
       <Split trip={trip} isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
