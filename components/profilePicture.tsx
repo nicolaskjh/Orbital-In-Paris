@@ -4,11 +4,11 @@ import { View, Image } from 'react-native';
 const profilePicture = require('@/assets/images/profilepicture.jpg');
 
 type ProfilePictureProps = {
-  size: "lg" | "default",
+  size: "lg" | "default" | "sm",
 };
 
 const ProfilePicture = ({size}: ProfilePictureProps) => {
-  const imageSize = size === "lg" ? "w-36 h-36" : "w-24 h-24";
+  const imageSize = size === "lg" ? "w-36 h-36" : size === "default" ? "w-24 h-24": "w-12 h-12";
 
   return (
     <View className="flex justify-center items-center">

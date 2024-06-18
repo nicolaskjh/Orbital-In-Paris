@@ -165,6 +165,14 @@ function RootLayoutNav() {
         }}
       />
       <Stack.Screen
+        name="newExpense"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        
+        }}
+      />
+      <Stack.Screen
         name="flight"
         options={{
           headerShown: false,

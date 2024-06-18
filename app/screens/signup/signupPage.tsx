@@ -64,8 +64,8 @@ const SignupPage = () => {
           <Logo/>
           <Header text="Signup Here!" size="lg"/>
           <View className="flex w-full h-2/5 items-center">
-            <TextField placeholder="Email" value={emailAddress} secureEntry={false} border="bottom" onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
-            <TextField placeholder="Password" value={password} secureEntry={true} border="bottom" onChangeText={(password) => setPassword(password)}/>
+            <TextField placeholder="Email" value={emailAddress} secureEntry={false} onChangeText={(emailAddress) => setEmailAddress(emailAddress)}/>
+            <TextField placeholder="Password" value={password} secureEntry={true} onChangeText={(password) => setPassword(password)}/>
             <View className="flex w-3/4 items-end">
               <Button type="plain" text="Signup" textType="normal" size="sm" corners="rounded" onPress={onSignupPress}/>
             </View>
@@ -78,7 +78,7 @@ const SignupPage = () => {
           <Logo/>
           <Header text="Verify Your Email" size="lg"/>
           <View className="flex w-full h-2/5 items-center">
-            <TextField placeholder="Verification Code" value={code} secureEntry={false} border="bottom" onChangeText={(code) => setCode(code)}/>
+            <TextField placeholder="Verification Code" value={code} secureEntry={false} onChangeText={(code) => setCode(code)}/>
             <View className="flex w-3/4 items-end">
               <Button type="plain" text="Verify Email" textType="normal" size="fitPadding" corners="rounded" onPress={onPressVerify}/>
             </View>

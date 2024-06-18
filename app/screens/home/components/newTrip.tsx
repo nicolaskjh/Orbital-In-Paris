@@ -109,8 +109,6 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
                 </View>
               </>
           )}
-            
-
           </View>
         </View>
       </Modal>

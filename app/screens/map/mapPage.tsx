@@ -9,7 +9,7 @@ const MapPage = () => {
 
   return (
     <View className="flex-1 flex-col justify-between items-center pt-20 bg-white">
-      <TextField placeholder="Search" value={location} border="full" secureEntry={false} onChangeText={(location) => setLocation(location)}/>
+      <TextField placeholder="Search" value={location} type="full" secureEntry={false} onChangeText={(location) => setLocation(location)}/>
       <NavigationBar/>
     </View>
   );

@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { parseISO, format } from "date-fns";
+import { formatDate } from '@/functions/formatDate';
 
 type TripButtonProps = {
   city: string,
@@ -15,11 +15,6 @@ type TripButtonProps = {
 
 const TripButton = ( {city, country, startDate, endDate, trip}: TripButtonProps ) => {
   const router = useRouter();
-
-  const formatDate = (dateString: string) => {
-    const date = parseISO(dateString);
-    return format(date, 'd MMM');
-  };
 
   return (
     <View className="flex flex-row w-full justify-center m-1">

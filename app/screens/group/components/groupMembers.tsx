@@ -4,11 +4,11 @@ import GroupMember from './groupMember';
 import {useAuth} from '@clerk/clerk-react';
 import { getMembers } from '@/utils/supabaseRequests';
 
-const GroupMembers = ({trip}) => {
-  const memberss = [
-    { id:0, name: 'Jerry' },
-    { id:1, name: 'Tom' },
-  ]
+type GroupMembersProps = {
+  trip: any;
+};
+
+const GroupMembers = ({trip}: GroupMembersProps) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [members, setMembers] = React.useState([]);
   const {userId, getToken} = useAuth();

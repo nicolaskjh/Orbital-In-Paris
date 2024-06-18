@@ -5,14 +5,14 @@ type TextFieldProps = {
   placeholder: string,
   value: string,
   secureEntry: boolean
-  border: "full" | "bottom"
+  type: "full" | "sm" | "default"
   onChangeText: (text: string) => void
 }
 
-const TextField = ( {placeholder, value, secureEntry, border, onChangeText}: TextFieldProps ) => {
-  const borders = border === "full" ? "border rounded-full p-2 pl-2" : "border-b";
-  const width = border === "full" ? "w-4/5" : "w-3/4";
-  const height = border === "full" ? "h-10" : ""
+const TextField = ( {placeholder, value, secureEntry, type, onChangeText}: TextFieldProps ) => {
+  const borders = type === "full" ? "border rounded-full p-2 pl-2" : "border-b";
+  const width = type === "full" ? "w-4/5" : type === "sm" ? "w-1/5" : "w-3/4";
+  const height = type === "full" ? "h-10" : ""
 
   return (
     <TextInput 
