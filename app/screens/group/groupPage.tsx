@@ -7,17 +7,12 @@ import Button from '@/components/button';
 import Invite from './components/invite';
 import NavigationBar from '@/components/navigationBar';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { parseISO, format } from "date-fns";
+import { formatDate } from '@/functions/formatDate';
 
 const GroupPage = () => {
   const router = useRouter();
   const trip = useLocalSearchParams();
   const [isPopupVisible, setPopupVisible] = React.useState(false);
-  
-  const formatDate = (dateString: string) => {
-    const date = parseISO(dateString);
-    return format(date, 'd MMM');
-  };
 
   return (
     <View className="flex flex-col justify-between h-full w-full bg-white">

@@ -157,6 +157,22 @@ function RootLayoutNav() {
         }}
       />
       <Stack.Screen
+        name="budget"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        
+        }}
+      />
+      <Stack.Screen
+        name="flight"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        
+        }}
+      />
+      <Stack.Screen
         name="group"
         options={{
           headerShown: false,

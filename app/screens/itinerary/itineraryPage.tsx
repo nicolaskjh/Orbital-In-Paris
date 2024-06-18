@@ -11,6 +11,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { parseISO, format } from "date-fns";
 import { claudePromptRequest } from 'utils/claudePromptRequest';
 import { useAuth } from '@clerk/clerk-expo';
+import { formatDate } from '@/functions/formatDate';
 
 const ItineraryPage = () => {
   const router = useRouter();
@@ -36,11 +37,6 @@ const ItineraryPage = () => {
     await claudePromptRequest({trip, token});
     setRefreshKey(oldKey => oldKey + 1);
     setIsLoading(false);
-  };
-
-  const formatDate = (dateString: string) => {
-    const date = parseISO(dateString);
-    return format(date, 'd MMM');
   };
 
   return (

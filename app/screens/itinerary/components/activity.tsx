@@ -24,7 +24,7 @@ const Activity = ( {time, location, activity} : ActivityProps ) => {
         <Text className="text-sm">{activity}</Text>
       </View>
       <Button text="Edit" type="borderless" textType="normal" size="fit" corners="rounded"/>
-  </View>
+    </View>
   );
 };  
 

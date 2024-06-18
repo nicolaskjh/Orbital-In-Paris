@@ -5,17 +5,12 @@ import TripTabs from './components/tripTabs';
 import Button from '@/components/button';
 import NavigationBar from '@/components/navigationBar';
 import { useLocalSearchParams } from 'expo-router';
-import { parseISO, format } from "date-fns";
+import { formatDate } from '@/functions/formatDate';
 
 const background = require('@/assets/images/background.png')
 
 const TripPage = () => { 
   const trip = useLocalSearchParams();
-
-  const formatDate = (dateString: string) => {
-    const date = parseISO(dateString);
-    return format(date, 'd MMM');
-  };
   
   return (
     <ImageBackground source={background} className="flex-1 flex-col justify-between bg-fixed bg-cover">

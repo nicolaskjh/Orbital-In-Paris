@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text } from "react-native";
 
 type TripHeaderProps = {
-  city: String,
-  country: String,
-  startDate: String,
-  endDate: String
+  city: string,
+  country: string,
+  startDate: string,
+  endDate: string
 };
 
 const TripHeader = ( {city, country, startDate, endDate}: TripHeaderProps ) => {
