@@ -27,7 +27,7 @@ const BudgetPage = () => {
     const fetchData = async () => {
       try {
       const token = await getToken({ template: 'supabase' });
-      const data = await getExpenses({token,trip});
+      const data = await getExpenses({token, trip, userId});
       setData(data);
       } catch (error) {
         console.error(error);
@@ -45,7 +45,7 @@ const BudgetPage = () => {
       {!isLoading && display === 'expenses' ? (
         <Expenses data = {data}/>
       ) : display === 'balances' ? (
-        <Balances/>
+        <Balances trip = {trip} user={data.userId}/>
       ) : (
         <TotalExpenses/>
       )}

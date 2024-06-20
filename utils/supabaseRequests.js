@@ -169,7 +169,8 @@ export const addTransaction = async ({token,transaction}) => {
         lender: payerId,
         owner: share.user_id,
         amount_due: share.amount,
-        transaction: transactionId
+        transaction: transactionId,
+        itinerary: transaction.itinerary
     }));
 
     console.log(duesEntries)
@@ -194,45 +195,60 @@ export const addTransaction = async ({token,transaction}) => {
     console.error('Error inserting dues:', error.message);
     }
 
-    return duesData;
+    return transactionData;
 }   
 
-export const getExpenses = async ({token,trip}) => {
+export const getExpenses = async ({token,trip, userId}) => {
     const supabase = await supabaseClient(token);
     const {data,error} = await supabase
         .from('transaction')
         .select('*,profiles(name)')
         .eq('itinerary',trip.id);
-    console.log(data)
+    const {data:user_id,error:erro2}  = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('user_id', userId);
+    data.userId = user_id[0].id;
     return data;
 }
 
 export const getBalances = async ({token,trip,user}) => {
     const supabase = await supabaseClient(token);
-    const {data,error} = await supabase
+    const {data:owe,error} = await supabase
         .from('dues')
-        .select('id, lender, owner, amount, transaction_id')
-        .eq('itinerary',trip.id);
-    console.log(data)
+        .select('id, lender, to:lender(name), owner, amount_due, transaction')
+        .eq('itinerary',trip.id)
+        .eq('owner',user)
+
+
+    const {data:lend,error:erro2} = await supabase
+        .from('dues')
+        .select('id, lender, from:owner(name), owner, amount_due, transaction')
+        .eq('itinerary',trip.id)
+        .eq('lender',user)
 
     let amountOwedByUser = {};
     let amountOwedToUser = {};
 
-    data.forEach((due) => {
-        if (due.owner === user) {
-            if (due.owner === personA) {
-                if (!amountOwedByUser[due.lender]) {
-                    amountOwedByUser[due.lender] = 0;
-                }
-                amountOwedByUser[due.lender] += due.amount;
+    lend.forEach((due) => {
+        if (due.owner !== due.lender) {
+            if (!amountOwedToUser[due.from.name]) {
+                amountOwedToUser[due.from.name] = 0;
             }
-            if (due.lender === personA) {
-                if (!amountOwedToUser[due.owner]) {
-                    amountOwedToUser[due.owner] = 0;
-                }
-                amountOwedToUser[due.owner] += due.amount;
+            amountOwedToUser[due.from.name] += due.amount_due;
+        }
+    });
+
+    owe.forEach((due) => {
+        if (due.owner !== due.lender) {
+            if (!amountOwedByUser[due.to.name]) {
+                amountOwedByUser[due.to.name] = 0;
             }
-        }});
+            amountOwedByUser[due.to.name] += due.amount_due;
+        }
+    });
+
+    console.log(amountOwedByUser, amountOwedToUser);
 
     return {
         amountOwedByUser,
