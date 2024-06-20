@@ -1,33 +1,28 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import Header from '@/components/header';
-import { useEffect } from 'react';
+import Balance from './balance';
 import { useAuth } from '@clerk/clerk-react';
-import { getBalances } from '@/utils/supabaseRequests';
 
-const Balances = ({trip,user}) => {
+type BalancesProps = {
+  trip: any;
+  user: any;
+  balances: Record<string, number>;
+  overall: number;
+};
+
+const Balances = ({trip, user, balances, overall}: BalancesProps) => {
   const {getToken} = useAuth();
-  const [data,setData] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-      const token = await getToken({ template: 'supabase' });
-      const data = await getBalances({token, trip, user});
-      setData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-    console.log(data)
-    setIsLoading(false);
-  }, []);
+  const balanceEntries = Object.entries(balances);
+
   return (
     <View className="flex-1">
       <ScrollView className="w-full">
         <Header text="Balances" size="md" padding="left"/>
+        {balanceEntries.map(([user, amount], index) => (
+          <Balance key={index} user={user} amount={amount} />
+        ))}
       </ScrollView>
     </View>
   );

@@ -227,31 +227,33 @@ export const getBalances = async ({token,trip,user}) => {
         .eq('itinerary',trip.id)
         .eq('lender',user)
 
-    let amountOwedByUser = {};
-    let amountOwedToUser = {};
+    let overall = 0;
+    let balances = {};
 
     lend.forEach((due) => {
         if (due.owner !== due.lender) {
-            if (!amountOwedToUser[due.from.name]) {
-                amountOwedToUser[due.from.name] = 0;
+            if (!balances[due.from.name]) {
+                balances[due.from.name] = 0;
             }
-            amountOwedToUser[due.from.name] += due.amount_due;
+            balances[due.from.name] += due.amount_due;
+            overall += due.amount_due;
         }
     });
 
     owe.forEach((due) => {
         if (due.owner !== due.lender) {
-            if (!amountOwedByUser[due.to.name]) {
-                amountOwedByUser[due.to.name] = 0;
+            if (!balances[due.to.name]) {
+                balances[due.to.name] = 0;
             }
-            amountOwedByUser[due.to.name] += due.amount_due;
+            balances[due.to.name] -= due.amount_due;
+            overall -= due.amount_due;
         }
     });
 
-    console.log(amountOwedByUser, amountOwedToUser);
+    console.log(balances, overall);
 
     return {
-        amountOwedByUser,
-        amountOwedToUser
+        'balances': balances,
+        'overall': overall
     };
 }

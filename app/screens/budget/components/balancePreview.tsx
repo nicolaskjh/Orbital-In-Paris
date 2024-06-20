@@ -6,11 +6,15 @@ type BalancePreviewProps = {
 }
 
 const BalancePreview = ( {balance}: BalancePreviewProps ) => {
-  const textColour = balance > 0 ? 'text-green-500' : 'text-red-500';
-
   return (
     <View className="flex flex-col justify-start w-full bg-white pt-2 pl-8">
-      <Text className={`text-base font-bold ${textColour}`}>You owe $10 overall</Text>
+      {balance < 0 ? (
+        <Text className={`text-base font-bold text-red-500`}>You owe ${Math.abs(balance)} overall</Text>
+      ) : balance > 0 ? (
+        <Text className={`text-base font-bold text-green-500`}>You are owed ${balance} overall</Text>
+      ) : (
+        <Text className={`text-base font-bold`}>You owe ${balance} overall</Text>
+      )}
     </View>
   )
 }
