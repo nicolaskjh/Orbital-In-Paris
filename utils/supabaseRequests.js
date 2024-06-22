@@ -257,3 +257,14 @@ export const getBalances = async ({token,trip,user}) => {
         'overall': overall
     };
 }
+
+export const getTotalExpenses = async ({token, trip, user}) => {
+    const supabase = await supabaseClient(token);
+    const {data:totalExpenseofGroup,error:erro1} = await supabase.from('transaction').select('amount.sum()').eq('itinerary',trip.id);
+    const {data:totalPersonalExpense,error:erro2} = await supabase.from('dues').select('amount_due.sum()').eq('itinerary',trip.id).eq('owner',user);
+   
+    return {
+        'totalExpenseofGroup': totalExpenseofGroup[0].sum,
+        'totalPersonalExpense': totalPersonalExpense[0].sum
+    }
+}

@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { formatDate } from '@/functions/formatDate';
 import { useAuth } from '@clerk/clerk-react';
-import { getExpenses, getBalances } from '@/utils/supabaseRequests';
+import { getExpenses, getBalances, getTotalExpenses } from '@/utils/supabaseRequests';
 
 const BudgetPage = () => {
   const trip = useLocalSearchParams();
@@ -21,6 +21,7 @@ const BudgetPage = () => {
   const [data, setData] = useState([]);
   const [balances, setBalances] = React.useState({});
   const [overall, setOverall] = React.useState(0);
+  const [totalExpenses, setTotalExpenses] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(true);
 
   const {userId, getToken} = useAuth();
@@ -33,14 +34,15 @@ const BudgetPage = () => {
       setData(data);
       const user = data.userId
       const balance = await getBalances({token, trip, user});
+      const totalExpenses = await getTotalExpenses({token, trip, user});
       setBalances(balance.balances);
       setOverall(balance.overall);
+      setTotalExpenses(totalExpenses);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-    console.log(balances)
     setIsLoading(false);
   }, []);
 
@@ -54,7 +56,7 @@ const BudgetPage = () => {
       ) : display === 'balances' ? (
         <Balances trip={trip} user={data.userId} balances={balances} overall={overall}/>
       ) : (
-        <TotalExpenses/>
+        <TotalExpenses expenses = {totalExpenses}/>
       )}
       <View className="flex flex-row w-full px-8 py-2 justify-end">
         <Button text="+" type="plain" textType="bold" size="circle" corners="rounded" onPress={() => router.replace({pathname: 'newExpense', params: trip})}/>
