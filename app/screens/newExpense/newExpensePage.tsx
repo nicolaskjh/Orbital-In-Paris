@@ -56,7 +56,6 @@ const NewExpensePage = () => {
             {label: 'Transport', value: 'Transport'},
             {label: 'Food', value: 'Food'},
             {label: 'Shopping', value: 'Shopping'},
-            {label: 'Settle Dues', value: 'Settle Dues'},
             {label: 'Others', value: 'Othesr'}
           ]}
           onChange={(item) => setCategory(item.value)}
@@ -68,7 +67,7 @@ const NewExpensePage = () => {
       </View>
       <Split trip={trip} isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} participants={participants} setParticipants={setParticipants}/>
       <View className="flex w-full items-center px-8 py-2">
-        <Button text="Save Expense" type="plain" size="lg" corners="rounded" onPress={handleSaveExpense}/>
+        <Button text="Save Expense" type="plain" size="lg" textType="bold" corners="rounded" onPress={handleSaveExpense}/>
       </View>
       <NavigationBar/>
     </View>

@@ -50,15 +50,22 @@ const BudgetPage = () => {
       <BalancePreview balance={overall}/>
       <BudgetTabs display={display} setDisplay={setDisplay}/>
       {!isLoading && display === 'expenses' ? (
-        <Expenses data={data}/>
+        <>
+          <Expenses data={data}/>
+          <View className="flex flex-row w-full items-center justify-center py-2">
+            <Button text="Add Expense" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => router.replace({pathname: 'newExpense', params: trip})}/>
+          </View>
+        </>
       ) : display === 'balances' ? (
-        <Balances trip={trip} user={data.userId} balances={balances} overall={overall}/>
+        <>
+          <Balances trip={trip} user={data.userId} balances={balances} overall={overall}/>
+          <View className="flex flex-row w-full items-center justify-center py-2">
+            <Button text="Settle Balances" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => router.replace({pathname: 'newExpense', params: trip})}/>
+          </View>
+        </>
       ) : (
         <TotalExpenses/>
       )}
-      <View className="flex flex-row w-full px-8 py-2 justify-end">
-        <Button text="+" type="plain" textType="bold" size="circle" corners="rounded" onPress={() => router.replace({pathname: 'newExpense', params: trip})}/>
-      </View>
       <NavigationBar/>
     </View>
   );
