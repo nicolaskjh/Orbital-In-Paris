@@ -10,8 +10,8 @@ type ExpensesProps = {
 const Expenses = ({data}: ExpensesProps) => {
   return (
     <View className="flex-1">
+      <Header text="Expenses" size="md" padding="left"/>
       <ScrollView className="w-full">
-        <Header text="Expenses" size="md" padding="left"/>
         {data && (data.map((res) => <Expense key={res.id} expenseType={res.category} amount={res.amount} date={res.date} description={res.description} payer={res.profiles.name}/>))}
       </ScrollView>
     </View>

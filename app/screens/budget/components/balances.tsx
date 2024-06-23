@@ -18,8 +18,8 @@ const Balances = ({trip, user, balances, overall}: BalancesProps) => {
 
   return (
     <View className="flex-1">
+      <Header text="Balances" size="md" padding="left"/>
       <ScrollView className="w-full">
-        <Header text="Balances" size="md" padding="left"/>
         {balanceEntries.map(([user, amount], index) => (
           <Balance key={index} user={user} amount={amount} />
         ))}

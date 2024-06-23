@@ -56,6 +56,7 @@ const NewExpensePage = () => {
             {label: 'Transport', value: 'Transport'},
             {label: 'Food', value: 'Food'},
             {label: 'Shopping', value: 'Shopping'},
+            {label: 'Settle Balances', value: 'Settle Balances'},
             {label: 'Others', value: 'Othesr'}
           ]}
           onChange={(item) => setCategory(item.value)}

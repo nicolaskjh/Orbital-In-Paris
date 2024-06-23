@@ -22,7 +22,7 @@ const Balance = ({user, amount}: BalanceProps) => {
           <Text className='text-green-500'>${amount}</Text>
         </View>
       ) : (
-        <Text className='pl-2'>You owe user ${amount}</Text>
+        <Text className='pl-2'>You owe {user} ${amount}</Text>
       )}
     </View>
   );

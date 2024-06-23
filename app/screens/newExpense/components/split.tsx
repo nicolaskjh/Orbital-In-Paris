@@ -27,7 +27,7 @@ const Split = ( {trip, isPopupVisible, setPopupVisible, participants, setPartici
       const token = await getToken({ template: 'supabase' });
       const members = await getMembers({token,trip});
       setMembers(members);
-      setParticipants(members.map(member => ({name: member.profiles.name, amount: "", user_id: member.profiles.id})));
+      setParticipants(members.map(member => ({name: member.profiles.name, amount: "0", user_id: member.profiles.id})));
       } catch (error) {
         console.error(error);
       }

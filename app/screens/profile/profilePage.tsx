@@ -9,13 +9,8 @@ import { useRouter, Link } from 'expo-router';
 import { useEffect } from 'react';
 import { getProfile } from '@/utils/supabaseRequests';
 
-
-type ProfilePageProps = {
-  name: string,
-};
-
-const ProfilePage = ( {name}: ProfilePageProps ) => {
-  const [ profile, setProfile ] = React.useState([]); 
+const ProfilePage = () => {
+  const [profile, setProfile] = React.useState([]); 
   const [isLoading, setIsLoading] = React.useState(true);
   const router = useRouter();
   const {signOut, isSignedIn, getToken, userId} = useAuth();
@@ -40,20 +35,20 @@ const ProfilePage = ( {name}: ProfilePageProps ) => {
   }
 
   return (
-    <View className="flex-1 justify-between pt-20 bg-white">
+    <View className="flex-1 justify-between pt-24 bg-white">
       {!isLoading && (
         <>
       <View className="flex flex-row items-center pl-4">
-        <ProfilePicture/>
+        <ProfilePicture size="default"/>
         <Header text={`${profile[0].name}`} size="xl"/>
       </View>
-      <View className="flex flex-col h-1/2">
+      <View className="flex flex-col h-1/2 pt-4">
         <Header text="Date of Birth:" size='lg' padding='left'/>
-        <Text className="pl-8">{profile[0].dateOfBirth}</Text>
+        <Text className="pl-8 pb-4">{profile[0].dateOfBirth}</Text>
         <Header text="Country:" size='lg' padding='left'/>
-        <Text className="pl-8">{profile[0].country}</Text>
+        <Text className="pl-8 pb-4">{profile[0].country}</Text>
         <Header text="Interests:" size='lg' padding='left'/>
-        <Text className="pl-8">{profile[0].interests}</Text>
+        <Text className="pl-8 pb-4">{profile[0].interests}</Text>
       </View>    
       <View className='flex flex-col w-full items-center'>
         <Button text="Update Profile" type="plain" textType="normal" size="lg" corners="rounded" onPress={() => router.replace('onboarding')}/>

@@ -11,7 +11,7 @@ const TripTabs = ({trips}) => {
   const Tabs = [
     {id: 0, name: 'Itinerary', logo: itinerary, path: 'itinerary'},
     {id: 1, name: 'Budget', logo: budget, path: 'budget'},
-    {id: 2, name: 'Flight & Accommodation', logo: flight, path: 'itinerary'},
+    {id: 2, name: 'Flight & Accommodation', logo: flight, path: 'flight'},
     {id: 3, name: 'Travel Group', logo: group, path: 'group'}
   ]
 

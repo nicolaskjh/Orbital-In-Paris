@@ -170,7 +170,8 @@ export const addTransaction = async ({token,transaction}) => {
         owner: share.user_id,
         amount_due: share.amount,
         transaction: transactionId,
-        itinerary: transaction.itinerary
+        itinerary: transaction.itinerary,
+        category: transaction.category
     }));
 
     console.log(duesEntries)
@@ -203,11 +204,12 @@ export const getExpenses = async ({token,trip, userId}) => {
     const {data,error} = await supabase
         .from('transaction')
         .select('*,profiles(name)')
-        .eq('itinerary',trip.id);
+        .eq('itinerary',trip.id)
+        .order('date', {ascending: false});
     const {data:user_id,error:erro2}  = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('user_id', userId);
+        .from('profiles')
+        .select('*')
+        .eq('user_id', userId);
     data.userId = user_id[0].id;
     return data;
 }
@@ -260,9 +262,20 @@ export const getBalances = async ({token,trip,user}) => {
 
 export const getTotalExpenses = async ({token, trip, user}) => {
     const supabase = await supabaseClient(token);
-    const {data:totalExpenseofGroup,error:erro1} = await supabase.from('transaction').select('amount.sum()').eq('itinerary',trip.id);
-    const {data:totalPersonalExpense,error:erro2} = await supabase.from('dues').select('amount_due.sum()').eq('itinerary',trip.id).eq('owner',user);
+    const {data:totalExpenseofGroup,error:erro1} = await supabase
+        .from('transaction')
+        .select('amount.sum()')
+        .eq('itinerary',trip.id)
+        .neq('category', 'Settle Balances');
+    const {data:totalPersonalExpense,error:erro2} = await supabase
+        .from('dues')
+        .select('amount_due.sum()')
+        .eq('itinerary',trip.id)
+        .eq('owner',user)
+        .neq('category', 'Settle Balances');
    
+    console.log(erro2);
+
     return {
         'totalExpenseofGroup': totalExpenseofGroup[0].sum,
         'totalPersonalExpense': totalPersonalExpense[0].sum

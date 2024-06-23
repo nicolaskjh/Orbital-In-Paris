@@ -18,7 +18,7 @@ type ExpenseProps = {
 }
 
 const Expense = ( {expenseType, amount, date, description, payer}: ExpenseProps ) => {
-  const icon = expenseType === 'Accommodation' ? accommodation : expenseType === 'Transport' ? transport : expenseType === 'Food' ? food : expenseType === 'Shopping' ? shopping : expenseType === 'Settle Dues' ? settle : others;
+  const icon = expenseType === 'Accommodation' ? accommodation : expenseType === 'Transport' ? transport : expenseType === 'Food' ? food : expenseType === 'Shopping' ? shopping : expenseType === 'Settle Balances' ? settle : others;
   const parsedDate = parseISO(date);
 
   return (
