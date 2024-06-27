@@ -28,15 +28,15 @@ const Expense = ( {expenseType, amount, date, description, payer}: ExpenseProps 
         <Text className="text-base">{format(parsedDate, 'dd')}</Text>
       </View>
       <View className="flex flex-row w-2/3 h-full justify-start items-center">
-        <Image source={icon} className="w-10 h-10 m-1"/>
+        <Image source={icon} className="w-10 h-10 m-2"/>
         <View className="flex flex-col justify-center">
           <Text className="text-base">{description}</Text>
-          <Text className="text-xs text-gray-500">{payer} paid SGD {amount}</Text>
+          <Text className="text-xs text-gray-500">Paid by {payer}</Text>
         </View>
       </View>
       <View className="flex flex-col h-full w-1/4 items-end justify-center">
-        <Text className="text-xs">You owe</Text>
-        <Text className="text-sm">SGD {amount}</Text>
+        {/* <Text className="text-xs">You owe</Text> */}
+        <Text className="text-base">SGD {amount}</Text>
       </View>
     </View>
   );

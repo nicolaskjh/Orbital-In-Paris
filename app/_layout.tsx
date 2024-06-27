@@ -181,6 +181,22 @@ function RootLayoutNav() {
         }}
       />
       <Stack.Screen
+        name="flights"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        
+        }}
+      />
+      <Stack.Screen
+        name="accommodation"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        
+        }}
+      />
+      <Stack.Screen
         name="group"
         options={{
           headerShown: false,

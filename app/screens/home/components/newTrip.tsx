@@ -91,7 +91,7 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
                   <TextField placeholder="End Date (YYYY-MM-DD)" value={endDate} onChangeText={setEndDate}/>
                   {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null}
                 </View>
-                <View className="flex h-1/3 w-full items-center pt-3">
+                <View className="flex h-1/3 w-full items-center pt-4">
                   <Button text="Create Trip" type="plain" textType="bold" size="lg" corners="rounded" onPress={handleCreateNewItinerary}/>
                   <Button text="Already have an invite code?" type="borderless" size="fit" onPress={changeTripType}/>
                 </View>  
@@ -103,7 +103,7 @@ const NewTrip = ({ isPopupVisible, setPopupVisible }: NewTripProps) => {
                   <TextField placeholder="Invite Code" value={inviteCode} onChangeText={setInviteCode}/>
                   {errorMessage ? <Text className="text-sm text-red-500">{errorMessage}</Text> : null}
                 </View>
-                <View className="flex h-1/3 w-full items-center pt-3">
+                <View className="flex h-1/3 w-full items-center pt-4">
                   <Button text="Join Trip" type="plain" textType="bold" size="lg" corners="rounded" onPress={addThroughInvite}/>
                   <Button text="Create a new trip instead" type="borderless" size="fit" onPress={changeTripType}/>
                 </View>
