@@ -35,9 +35,7 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
 
   const handleSearchAccoms = () => {
     setPopupVisible(!isPopupVisible);
-    console.log("Routing to accommodation page")
-    router.replace({pathname: 'accommodation', params: trip})
-    console.log("Routed successfully")
+    router.push({pathname: 'accommodation', params: trip});
   }
 
   return (

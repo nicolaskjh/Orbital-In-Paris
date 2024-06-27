@@ -2,9 +2,7 @@ import React from 'react';
 import FlightsPage from './screens/flights/flightsPage';
 
 const Flights = () => {
-  return (
-    <FlightsPage/>
-  );
+  return <FlightsPage/>;
 };
 
 export default Flights;

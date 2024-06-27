@@ -30,6 +30,11 @@ const FlightSearch = ({ isPopupVisible, setPopupVisible }: FlightSearchProps) =>
     setReturnDate("");
   }
 
+  const handleSearchFlights = () => {
+    setPopupVisible(!isPopupVisible);
+    router.push({pathname: 'flights', params: trip});
+  }
+
   return (
     <View className="flex flex-col justify-between items-center w-full bg-white">
       <Modal isVisible={isPopupVisible} onBackdropPress={() => setPopupVisible(!isPopupVisible)}>
@@ -46,7 +51,7 @@ const FlightSearch = ({ isPopupVisible, setPopupVisible }: FlightSearchProps) =>
                 <TextField placeholder="Return Date (YYYY-MM-DD)" value={returnDate} onChangeText={setReturnDate}/>
               </View>
               <View className="flex h-1/3 w-full items-center pt-4">
-                <Button text="Find Flights" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => router.replace({pathname: 'flights', params: trip})}/>
+                <Button text="Find Flights" type="plain" textType="bold" size="lg" corners="rounded" onPress={handleSearchFlights}/>
               </View>          
           </View>
         </View>
