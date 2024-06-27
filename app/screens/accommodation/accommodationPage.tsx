@@ -7,6 +7,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { formatDate } from '@/functions/formatDate';
 
 const AccommodationPage = () => {
+  console.log("Rendered")
   const trip = useLocalSearchParams();
 
   return (

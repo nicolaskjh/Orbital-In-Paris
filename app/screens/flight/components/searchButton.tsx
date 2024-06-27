@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 
 type SearchButtonProps = {
-  onPress: any;
+  onPress: () => void;
 };
 
 const SearchButton = ({ onPress }: SearchButtonProps) => {

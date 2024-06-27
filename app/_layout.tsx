@@ -161,7 +161,6 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-        
         }}
       />
       <Stack.Screen
@@ -169,7 +168,6 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-        
         }}
       />
       <Stack.Screen
@@ -177,7 +175,6 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-        
         }}
       />
       <Stack.Screen
@@ -185,7 +182,6 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-        
         }}
       />
       <Stack.Screen
@@ -193,7 +189,6 @@ function RootLayoutNav() {
         options={{
           headerShown: false,
           gestureEnabled: false,
-        
         }}
       />
       <Stack.Screen

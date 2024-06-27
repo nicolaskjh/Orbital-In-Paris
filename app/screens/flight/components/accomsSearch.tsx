@@ -33,6 +33,13 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
     setSortBy("");
   }
 
+  const handleSearchAccoms = () => {
+    setPopupVisible(!isPopupVisible);
+    console.log("Routing to accommodation page")
+    router.replace({pathname: 'accommodation', params: trip})
+    console.log("Routed successfully")
+  }
+
   return (
     <View className="flex flex-col justify-between items-center w-full bg-white">
       <Modal isVisible={isPopupVisible} onBackdropPress={() => setPopupVisible(!isPopupVisible)}>
@@ -63,7 +70,7 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
                 />
               </View>
               <View className="flex h-1/3 w-full items-center pt-4">
-                <Button text="Find Accommodation" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => router.replace({pathname: 'accommodation', params: trip})}/>
+                <Button text="Find Accommodation" type="plain" textType="bold" size="lg" corners="rounded" onPress={handleSearchAccoms}/>
               </View>          
           </View>
         </View>
