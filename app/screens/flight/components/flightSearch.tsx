@@ -32,7 +32,17 @@ const FlightSearch = ({ isPopupVisible, setPopupVisible }: FlightSearchProps) =>
 
   const handleSearchFlights = () => {
     setPopupVisible(!isPopupVisible);
-    router.push({pathname: 'flights', params: trip});
+    const flightDetails = {
+      from,
+      to,
+      flightDate,
+      returnDate,
+      city: trip.city,
+      country: trip.country,
+      start_date: trip.start_date,
+      end_date: trip.end_date
+    }
+    router.push({pathname: 'flights', params: flightDetails});
   }
 
   return (

@@ -17,7 +17,6 @@ type AccomsSearch = {
 const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
   const trip = useLocalSearchParams();
   const router = useRouter();
-  const[location, setLocation] = useState("");
   const[numberAdults, setNumberAdults] = useState("");
   const[checkIn, setCheckIn] = useState("");
   const[checkOut, setCheckOut] = useState("");
@@ -26,7 +25,6 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
 
   const exitPopup = () => {
     setPopupVisible(!isPopupVisible);
-    setLocation("");
     setNumberAdults("");
     setCheckIn("");
     setCheckOut("");
@@ -35,7 +33,14 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
 
   const handleSearchAccoms = () => {
     setPopupVisible(!isPopupVisible);
-    router.push({pathname: 'accommodation', params: trip});
+    const bookingDetails = {
+      location: trip.city,
+      checkout_date: checkOut,
+      checkin_date: checkIn,
+      adults_number: numberAdults,
+      sort_by: sortBy,
+    }
+    router.push({pathname: 'accommodation', params: bookingDetails });
   }
 
   return (
@@ -48,8 +53,7 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
               </View>
               <Header text="Search for Accommodation!" size="lg" padding="none" verticalPadding={false}/>
               <View className="flex flex-col h-3/5 w-full items-center pt-2">
-                <TextField placeholder="Location" value={location} onChangeText={setLocation}/>
-                <TextField placeholder="Number Of Adutls" value={numberAdults} onChangeText={setNumberAdults}/>
+                <TextField placeholder="Number Of Adults" value={numberAdults} onChangeText={setNumberAdults}/>
                 <TextField placeholder="Check In Date (YYYY-MM-DD)" value={checkIn} onChangeText={setCheckIn}/>
                 <TextField placeholder="Check Out Date (YYYY-MM-DD)" value={checkOut} onChangeText={setCheckOut}/>
                 <Dropdown 
