@@ -55,8 +55,8 @@ const FlightSearch = ({ isPopupVisible, setPopupVisible }: FlightSearchProps) =>
               </View>
               <Header text="Search for Flights!" size="lg" padding="none" verticalPadding={false}/>
               <View className="flex flex-col h-1/2 w-full items-center pt-2">
-                <TextField placeholder="Flight From" value={from} onChangeText={setFrom}/>
-                <TextField placeholder="Destination Country" value={to} onChangeText={setTo}/>
+                <TextField placeholder="Origin City" value={from} onChangeText={setFrom}/>
+                <TextField placeholder="Destination City" value={to} onChangeText={setTo}/>
                 <TextField placeholder="Flight Date (YYYY-MM-DD)" value={flightDate} onChangeText={setFlightDate}/>
                 <TextField placeholder="Return Date (YYYY-MM-DD)" value={returnDate} onChangeText={setReturnDate}/>
               </View>

@@ -5,7 +5,7 @@ import WeekCalendar from './components/weekCalendar';
 import Activities from './components/activities';
 import NewActivity from './components/newActivity';
 import Button from '@/components/button';
-import LoadingPopup from './components/loadingPopup';
+import LoadingPopup from '@/components/loadingPopup';
 import NavigationBar from '@/components/navigationBar';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { parseISO, format } from "date-fns";
@@ -45,7 +45,7 @@ const ItineraryPage = () => {
       <WeekCalendar date={date} tripStart={parseISO(trip.start_date)} tripEnd={parseISO(trip.end_date)} onSelectDate={(newDate) => setDate(newDate)}/>
       <Activities trips={trip} selectedDay={date} tripStart={parseISO(trip.start_date)} refreshToken={refreshKey}/>
       <NewActivity isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} trip={trip} onActivitySubmit={newActivitySubmit}/>
-      <LoadingPopup isLoading={isLoading}/>
+      <LoadingPopup text="Generating itinerary..." isLoading={isLoading}/>
       <View className="flex flex-row w-full px-8 py-2 justify-between">
         <Button text="Generate New Itinerary" type="plain" textType="bold" size="lg" corners="rounded" onPress={() => handleClaudePrompt(trip)}/>
         <Button text="+" type="plain" textType="bold" size="circle" corners="rounded" onPress={newActivityPress}/>

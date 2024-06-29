@@ -195,7 +195,7 @@ function RootLayoutNav() {
         name="hotelWebView"
         options={{
           headerShown: true,
-          title: 'Hotel Booking',
+          title: 'Accommodation Booking',
           headerBackTitle: 'Back',
           gestureEnabled: false,
         }}

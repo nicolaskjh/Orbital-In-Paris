@@ -1,5 +1,5 @@
 import React , { useEffect, useState }from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import TripHeader from '@/components/tripHeader';
 import Flights from './components/flights';
 import NavigationBar from '@/components/navigationBar';
@@ -40,6 +40,8 @@ const FlightsPage = () => {
   return (
     <View className="flex flex-col w-full h-full justify-between bg-white">
       <TripHeader city={trip.city} country={trip.country} startDate={formatDate(trip.start_date)} endDate={formatDate(trip.end_date)}/>
+      <Text className="text-base font-bold text-center pt-4">Round Trips from {details.to} to {details.from}</Text>
+      <Text className="text-base text-center">{formatDate(details.flightDate)} - {formatDate(details.returnDate)}</Text>
       <Flights flights={data}/>
       <NavigationBar/>
     </View>
