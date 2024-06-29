@@ -1,5 +1,4 @@
 import axios from 'axios' 
-import { ca } from 'date-fns/locale';
 
 const getDestId = async (location) => {
     res = await axios.request({
