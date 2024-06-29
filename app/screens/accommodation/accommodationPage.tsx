@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import TripHeader from '@/components/tripHeader';
+import Header from '@/components/header';
+import Hotels from './components/hotels';
 import NavigationBar from '@/components/navigationBar';
 import { useLocalSearchParams } from 'expo-router';
 import { formatDate } from '@/functions/formatDate';
@@ -16,8 +18,9 @@ const AccommodationPage = () => {
   useEffect(() => {
     const getData = async () => {
       // fetch data from the backend
-      const res = getHotelList(bookingDetails);
-      setData(res)
+      const data = await getHotelList(bookingDetails);
+      setData(data);
+      console.log(data);
     }
     getData();
     setIsLoading(false);
@@ -25,7 +28,9 @@ const AccommodationPage = () => {
 
   return (
     <View className="flex flex-col w-full h-full justify-between bg-white">
-
+      <TripHeader city={bookingDetails.city} country={bookingDetails.country} startDate={formatDate(bookingDetails.start_date)} endDate={formatDate(bookingDetails.end_date)}/>
+      <Text className="text-base font-bold text-center pt-4">Accommodation in {bookingDetails.city} from {formatDate(bookingDetails.checkin_date)} - {formatDate(bookingDetails.checkout_date)}</Text>
+      <Hotels hotels={data}/>
       <NavigationBar/>
     </View>
   )

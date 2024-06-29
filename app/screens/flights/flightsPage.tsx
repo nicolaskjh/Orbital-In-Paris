@@ -1,6 +1,7 @@
 import React , { useEffect, useState }from 'react';
 import { View } from 'react-native';
 import TripHeader from '@/components/tripHeader';
+import Flights from './components/flights';
 import NavigationBar from '@/components/navigationBar';
 import { useLocalSearchParams } from 'expo-router';
 import { formatDate } from '@/functions/formatDate';
@@ -28,8 +29,9 @@ const FlightsPage = () => {
   useEffect(() => {
     const getData = async () => {
       // fetch data from the backend
-      const res = getFlightList(details);
-      setData(res)
+      const res = await getFlightList(details);
+      setData(res);
+      console.log(data);
     }
     getData();
     setIsLoading(false);
@@ -38,6 +40,7 @@ const FlightsPage = () => {
   return (
     <View className="flex flex-col w-full h-full justify-between bg-white">
       <TripHeader city={trip.city} country={trip.country} startDate={formatDate(trip.start_date)} endDate={formatDate(trip.end_date)}/>
+      <Flights flights={data}/>
       <NavigationBar/>
     </View>
   )

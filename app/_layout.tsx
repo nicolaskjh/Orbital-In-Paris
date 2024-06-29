@@ -192,6 +192,15 @@ function RootLayoutNav() {
         }}
       />
       <Stack.Screen
+        name="hotelWebView"
+        options={{
+          headerShown: true,
+          title: 'Hotel Booking',
+          headerBackTitle: 'Back',
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
         name="group"
         options={{
           headerShown: false,

@@ -39,6 +39,10 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
       checkin_date: checkIn,
       adults_number: numberAdults,
       sort_by: sortBy,
+      city: trip.city,
+      country: trip.country,
+      start_date: trip.start_date,
+      end_date: trip.end_date
     }
     router.push({pathname: 'accommodation', params: bookingDetails });
   }
@@ -47,12 +51,12 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
     <View className="flex flex-col justify-between items-center w-full bg-white">
       <Modal isVisible={isPopupVisible} onBackdropPress={() => setPopupVisible(!isPopupVisible)}>
         <View className="flex justify-center items-center h-full">
-            <View className="flex flex-col justify-between items-center h-2/5 w-5/6 pb-5 bg-white rounded-xl">
+            <View className="flex flex-col justify-between items-center h-1/3 w-5/6 pb-5 bg-white rounded-xl">
               <View className="flex flex-row w-full justify-end px-1">
                 <Button text="X" type="borderless" textType="bold" size="fit" corners="rounded" onPress={exitPopup}/>
               </View>
               <Header text="Search for Accommodation!" size="lg" padding="none" verticalPadding={false}/>
-              <View className="flex flex-col h-3/5 w-full items-center pt-2">
+              <View className="flex flex-col h-1/2 w-full items-center pt-2">
                 <TextField placeholder="Number Of Adults" value={numberAdults} onChangeText={setNumberAdults}/>
                 <TextField placeholder="Check In Date (YYYY-MM-DD)" value={checkIn} onChangeText={setCheckIn}/>
                 <TextField placeholder="Check Out Date (YYYY-MM-DD)" value={checkOut} onChangeText={setCheckOut}/>
@@ -71,7 +75,7 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
                   onChange={(item) => setSortBy(item.value)}
                 />
               </View>
-              <View className="flex h-1/3 w-full items-center pt-4">
+              <View className="flex h-1/3 w-full items-center pt-8">
                 <Button text="Find Accommodation" type="plain" textType="bold" size="lg" corners="rounded" onPress={handleSearchAccoms}/>
               </View>          
           </View>
