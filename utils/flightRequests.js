@@ -5,7 +5,7 @@ const getDestId = async (location) => {
         url: 'https://sky-scanner3.p.rapidapi.com/flights/auto-complete',
         params: {query: location},
         headers: {
-          'x-rapidapi-key': '9955fe3d24msh1219bc8085b2659p139cdcjsnd0cc73aabcb9',
+          'x-rapidapi-key': '228bfff73fmsh166907e1a9c89b4p153b68jsnc6cd9eef59e6',
           'x-rapidapi-host': 'sky-scanner3.p.rapidapi.com'
         }
       });
@@ -14,10 +14,10 @@ const getDestId = async (location) => {
 }
 
 export const getFlightList = async (flightDetails) => {
-    console.log(flightDetails)
     try  {
         const hi = await getDestId(flightDetails.from);
         const bye = await getDestId(flightDetails.to);
+        console.log(flightDetails)
         res = await axios({
             method: 'GET',
             url: 'https://sky-scanner3.p.rapidapi.com/flights/search-roundtrip',
@@ -28,13 +28,12 @@ export const getFlightList = async (flightDetails) => {
               returnDate: flightDetails.returnDate,
             },
             headers: {
-              'x-rapidapi-key': '9955fe3d24msh1219bc8085b2659p139cdcjsnd0cc73aabcb9',
+              'x-rapidapi-key': '228bfff73fmsh166907e1a9c89b4p153b68jsnc6cd9eef59e6',
               'x-rapidapi-host': 'sky-scanner3.p.rapidapi.com'
             }
           });
-          console.log(res.data.data.itineraries)
-          return res.data.data.itineraries;
+        return res.data.data.itineraries;
     } catch (error) {
-        console.error(error);
+        console.error(error.toJSON());
     }
   }

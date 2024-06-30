@@ -20,7 +20,6 @@ const FlightSearch = ({ isPopupVisible, setPopupVisible }: FlightSearchProps) =>
   const[to, setTo] = useState("");
   const[flightDate, setFlightDate] = useState("");
   const[returnDate, setReturnDate] = useState("");
-  const {userId, getToken} = useAuth();
 
   const exitPopup = () => {
     setPopupVisible(!isPopupVisible);
@@ -40,7 +39,8 @@ const FlightSearch = ({ isPopupVisible, setPopupVisible }: FlightSearchProps) =>
       city: trip.city,
       country: trip.country,
       start_date: trip.start_date,
-      end_date: trip.end_date
+      end_date: trip.end_date,
+      itinerary : trip.id
     }
     router.push({pathname: 'flights', params: flightDetails});
   }

@@ -2,31 +2,41 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import Button from '@/components/button';
 import { format } from 'date-fns';
+import { useAuth } from '@clerk/clerk-react';
+import { setFlights } from '@/utils/supabaseRequests';
+import Flights from './flights';
+import { useRouter } from 'expo-router';
 
 type FlightProps = {
-  flight: any;
+  flight: any,
+  trip: any
 };
 
-/* 
-  Data Schema:
-  Price = flight.price.formatted
-  (Outbound)
-  Origin airport = flight.legs[0].origin.id
-  Destination airport = flight.legs[0].destination.id
-  Depature dateTime = flight.legs[0].depature
-  Arrival dateTime = flight.legs[0].arrival
-  Airline = flight.legs[0].carriers.marketing[0].name
-  AirlineLogo = flight.legs[0].carriers.marketing[0].logoUrl
-  (Inbound)
-  Origin airport = flight.legs[1].origin.id
-  Destination airport = flight.legs[1].destination.id
-  Depature dateTime = flight.legs[1].depature
-  Arrival dateTime = flight.legs[1].arrival
-  Airline = flight.legs[1].carriers.marketing[0].name
-  AirlineLogo = flight.legs[1].carriers.marketing[0].logoUrl
-  */
+const Flight = ({flight, trip}: FlightProps) => {
+  const router = useRouter();
+  const {userId, getToken} = useAuth();
+  const handleOnPress = async () => {
+    const token = await getToken({ template: 'supabase' });
+    const details = {
+      itinerary: trip.id,
+      origin_outbound: flight.legs[0].origin.id,
+      destination_outbound: flight.legs[0].destination.id ,
+      depature_outbound: flight.legs[0].departure ,
+      arrival_outbound: flight.legs[0].arrival ,
+      airline_outbound: flight.legs[0].carriers.marketing[0].name,
+      logo_outbound : flight.legs[0].carriers.marketing[0].logoUrl,
+      origin_inbound: flight.legs[1].origin.id,
+      destination_inbound: flight.legs[1].destination.id,
+      depature_inbound: flight.legs[1].departure,
+      arrival_inbound: flight.legs[1].arrival,
+      airline_inbound: flight.legs[1].carriers.marketing[0].name,
+      logo_inbound : flight.legs[1].carriers.marketing[0].logoUrl,
+      price : flight.price.formatted
+    }
+    const res = await setFlights({token, details, userId});
+    router.push({pathname: 'flight', params: trip});
+  }
 
-const Flight = ({flight}: FlightProps) => {
   return (
     <View className="flex flex-row w-full border-b border-gray-500 px-4 py-2">
       <View className="flex flex-col justify-between items-center w-3/4 pr-2">
@@ -49,7 +59,7 @@ const Flight = ({flight}: FlightProps) => {
       </View>
       <View className="flex flex-col justify-center items-center w-1/4">
         <Text className="text-sm font-bold">{flight.price.formatted}</Text>
-        <Button text="Add to Trip" fontSize="sm" type="borderless" size="fit" corners="rounded" margins={false} onPress={() => {}}/>
+        <Button text="Add to Trip" fontSize="sm" type="borderless" size="fit" corners="rounded" margins={false} onPress={handleOnPress}/>
       </View>
     </View>
   );

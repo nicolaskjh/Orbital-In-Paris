@@ -281,3 +281,75 @@ export const getTotalExpenses = async ({token, trip, user}) => {
         'totalPersonalExpense': totalPersonalExpense[0].sum
     }
 }
+
+export const setAccoms = async ({token, details, userId}) => {
+    const supabase = await supabaseClient(token);
+    const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('user_id', userId);
+    const id = profileData[0].id;
+    const {data, error:accomError} = await supabase
+        .from('accommodations')
+        .insert({
+            "hotelName": details.name,
+            "hotelAddress": details.address,
+            "fromDate": details.checkin_date,
+            "endDate": details.checkout_date,
+            "owner": id,
+            "itinerary": details.itinerary,
+            "logo" : details.image
+        }).select("*")
+    console.log(data)
+    return data;
+}
+
+export const setFlights = async ({token, details, userId}) => {
+    const supabase = await supabaseClient(token);
+    const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('user_id', userId);
+    const id = profileData[0].id;
+    const {data, error} = await supabase
+        .from('flights')
+        .insert({
+            "owner": id,
+            "itinerary": details.itinerary,
+            "origin_outbound": details.origin_outbound,
+            "destination_outbound": details.destination_outbound,
+            "depature_outbound": details.depature_outbound,
+            "arrival_outbound": details.arrival_outbound,
+            "airline_outbound": details.airline_outbound,
+            "logo_outbound" : details.logo_outbound,
+            "origin_inbound": details.origin_inbound,
+            "destination_inbound": details.destination_inbound,
+            "depature_inbound": details.depature_inbound,
+            "arrival_inbound": details.arrival_inbound,
+            "airline_inbound": details.airline_inbound,
+            "logo_inbound" : details.logo_inbound,
+            "price" :details.price
+        }).select("*")
+    console.log(error)
+    return data;
+}
+
+export const getFlightAndAccom = async ({token, trip, userId}) => {
+    const supabase = await supabaseClient(token);
+    const { data: profileData, error: profileError } = await supabase
+    .from('profiles')
+    .select('id')
+    .eq('user_id', userId);
+    const id = profileData[0].id;
+    const {data:flight,error:flightError} = await supabase
+        .from('flights')
+        .select('*')
+        .eq('itinerary',trip.id)
+        .eq('owner',id)
+    const {data:accom,error:accomError} = await supabase
+        .from('accommodations')
+        .select('*')
+        .eq('itinerary',trip.id)
+        .eq('owner',id)
+    return {'flight' : flight, 'accom' : accom};
+}

@@ -42,7 +42,8 @@ const AccomsSearch = ({ isPopupVisible, setPopupVisible }: AccomsSearch) => {
       city: trip.city,
       country: trip.country,
       start_date: trip.start_date,
-      end_date: trip.end_date
+      end_date: trip.end_date,
+      itinerary : trip.id
     }
     router.push({pathname: 'accommodation', params: bookingDetails });
   }

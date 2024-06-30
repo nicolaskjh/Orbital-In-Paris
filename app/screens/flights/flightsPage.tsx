@@ -6,6 +6,7 @@ import NavigationBar from '@/components/navigationBar';
 import { useLocalSearchParams } from 'expo-router';
 import { formatDate } from '@/functions/formatDate';
 import { getFlightList } from '@/utils/flightRequests';
+import { id } from 'date-fns/locale';
 
 const FlightsPage = () => {
   const [data, setData] = useState([]);
@@ -23,9 +24,10 @@ const FlightsPage = () => {
     city: flightDetails.city,
     country: flightDetails.country,
     start_date: flightDetails.start_date,
-    end_date: flightDetails.end_date
+    end_date: flightDetails.end_date,
+    id: flightDetails.itinerary
   }
-
+  console.log(trip)
   useEffect(() => {
     const getData = async () => {
       // fetch data from the backend
@@ -42,7 +44,7 @@ const FlightsPage = () => {
       <TripHeader city={trip.city} country={trip.country} startDate={formatDate(trip.start_date)} endDate={formatDate(trip.end_date)}/>
       <Text className="text-base font-bold text-center pt-4">Round Trips from {details.to} to {details.from}</Text>
       <Text className="text-base text-center">{formatDate(details.flightDate)} - {formatDate(details.returnDate)}</Text>
-      <Flights flights={data}/>
+      <Flights flights={data} trip = {trip}/>
       <NavigationBar/>
     </View>
   )
