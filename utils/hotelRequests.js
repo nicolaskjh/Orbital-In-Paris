@@ -10,7 +10,7 @@ const getDestId = async (location) => {
         locale: 'en-gb'
       },
       headers: {
-        'x-rapidapi-key': '028ea6e38emshc167d7f308d7783p14478fjsnf0e6d9633ef9',
+        'x-rapidapi-key': 'fb328f7ab2mshf618be0d4ce8ad0p1a8d98jsn0aeb5995be55',
         'x-rapidapi-host': 'booking-com.p.rapidapi.com'
       }
     });

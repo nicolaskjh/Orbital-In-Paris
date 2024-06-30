@@ -12,6 +12,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { formatDate } from '@/functions/formatDate';
 import { useAuth } from '@clerk/clerk-react';
 import { getFlightAndAccom } from '@/utils/supabaseRequests';
+import { set } from 'date-fns';
 
 const FlightPage = () => {
   const trip = useLocalSearchParams();
@@ -25,22 +26,54 @@ const FlightPage = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const token = await getToken({ template: 'supabase' });
-      const data = await getFlightAndAccom({token, userId, trip});
-      setFlights(data.flight);
-      setAccommodations(data.accom);
-    }
+      try {
+        const token = await getToken({ template: 'supabase' });
+        const data = await getFlightAndAccom({ token, userId, trip });
+        console.log(data);
+
+        setFlights(data.flight);
+        setAccommodations(data.accom);
+        console.log('Flights:', data.flight);
+        console.log(!flights);
+        console.log('Accommodations:', data.accom);
+        console.log(!accommodations);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
+        console.log('Loading:', false);
+      }
+    };
     getData();
-    setIsLoading(false);
   }, []);
 
   return (
     <View className="flex flex-col justify-between h-full w-full bg-white">
       <TripHeader city={trip.city} country={trip.country} startDate={formatDate(trip.start_date)} endDate={formatDate(trip.end_date)}/>
-      <View className="flex-1 justify-end">
-        <FlightsDisplay isPopupVisible={isFlightSearchVisible} setPopupVisible={setFlightSearchVisible}/>
-        <AccommodationDisplay isPopupVisible={isAccomsSearchVisible} setPopupVisible={setAccomsSearchVisible}/>
-      </View>
+      {!isLoading && (flights.length === 0 && accommodations.length > 0) &&
+        <View className="flex-1 justify-center">
+          <FlightsDisplay isPopupVisible={isFlightSearchVisible} setPopupVisible={setFlightSearchVisible}/>
+          <AccommodationDisplay booking={accommodations} isPopupVisible={isAccomsSearchVisible} setPopupVisible={setAccomsSearchVisible}/>
+        </View>
+      }
+      {!isLoading && (flights.length > 0 && accommodations.length === 0) &&
+        <View className="flex-1 justify-center">
+          <FlightsDisplay booking={flights} isPopupVisible={isFlightSearchVisible} setPopupVisible={setFlightSearchVisible}/>
+          <AccommodationDisplay isPopupVisible={isAccomsSearchVisible} setPopupVisible={setAccomsSearchVisible}/>
+        </View>
+      }
+      {!isLoading && (flights.length > 0 && accommodations.length > 0) &&
+        <View className="flex-1 justify-center">
+          <FlightsDisplay booking={flights} isPopupVisible={isFlightSearchVisible} setPopupVisible={setFlightSearchVisible}/>
+          <AccommodationDisplay booking={accommodations} isPopupVisible={isAccomsSearchVisible} setPopupVisible={setAccomsSearchVisible}/>
+        </View>
+      }
+      {isLoading || (flights.length === 0 && accommodations.length === 0) &&
+        <View className="flex-1 justify-center">
+          <FlightsDisplay isPopupVisible={isFlightSearchVisible} setPopupVisible={setFlightSearchVisible}/>
+          <AccommodationDisplay isPopupVisible={isAccomsSearchVisible} setPopupVisible={setAccomsSearchVisible}/>
+        </View>
+      } 
       <FlightSearch isPopupVisible={isFlightSearchVisible} setPopupVisible={setFlightSearchVisible}/>
       <AccomsSearch isPopupVisible={isAccomsSearchVisible} setPopupVisible={setAccomsSearchVisible}/>
       <NavigationBar/>
