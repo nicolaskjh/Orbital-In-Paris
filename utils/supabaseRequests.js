@@ -1,5 +1,5 @@
 import { supabaseClient } from "./supabaseClient";
-import { parseISO, differenceInCalendarDays} from "date-fns";
+import { parseISO, differenceInCalendarDays, addYears} from "date-fns";
 
 export const getItineraries = async ({userId,token}) => {
     const supabase = await supabaseClient(token);
@@ -352,4 +352,38 @@ export const getFlightAndAccom = async ({token, trip, userId}) => {
         .eq('itinerary',trip.id)
         .eq('owner',id)
     return {'flight' : flight, 'accom' : accom};
+}
+
+export const getPeople = async ({token, userId, range}) => {
+    const supabase = await supabaseClient(token);
+    const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', userId);
+    const id = profileData[0].id;
+    const date = profileData[0].dateOfBirth;
+    const startDate = addYears(parseISO(date), range);
+    const endDate = addYears(parseISO(date), -1 * range);
+    const { data: profilesData, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .rangeLte(dateOfBirth, `[${startDate}, ${endDate}]`)
+    console.log(profilesData)
+    return profilesData;
+}
+
+export const sendInvites = async ({token, userId, id, message}) => {
+    const supabase = await supabaseClient(token);
+    const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', userId);
+    const { data: user, error } = await supabase
+        .from('invitation')
+        .insert({
+            "sender": profileData[0].id,
+            "receiver": id,
+            "message": message
+        })
+    return user;
 }
