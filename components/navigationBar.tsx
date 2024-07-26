@@ -7,7 +7,7 @@ const NavigationBar = () => {
     const tabs = [
         { id: 0, name: "Home", source: FontAwesome, icon: "home", path: "/home" },
         { id: 1, name: "Map", source: FontAwesome, icon: "map-marker", path: "/map" },
-        { id: 2, name: "Messages", source: Ionicons, icon: "chatbubble-ellipses", path: "/messages" },
+        { id: 2, name: "Invites", source: Ionicons, icon: "mail", path: "/messages" },
         { id: 3, name: "Profile", source: Ionicons, icon: "person-circle-sharp", path: "/profile" },
     ];
 

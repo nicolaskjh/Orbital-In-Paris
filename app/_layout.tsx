@@ -207,6 +207,13 @@ function RootLayoutNav() {
           gestureEnabled: false,
         }}
       />
+      <Stack.Screen
+        name="invite"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
       </Stack>
     </ThemeProvider>
   );

@@ -9,8 +9,8 @@ import NavigationBar from '@/components/navigationBar';
 const MessagesPage = () => {
   return (
     <View className="flex-1 flex-col justify-between items-center pt-16 bg-white">
-      <Header text="Chats" size="lg"/>
-      <Text>Coming soon!</Text>
+      <Header text="Invites" size="lg"/>
+      <Messages/>
       <NavigationBar/>
     </View>
   );
