@@ -10,9 +10,11 @@ type UsersProps = {
   trip: any;
   isPopupVisible: boolean;
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  invitee: number;
+  setInvitee: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const Users = ({trip, isPopupVisible, setPopupVisible}: UsersProps) => {
+const Users = ({trip, isPopupVisible, setPopupVisible, invitee, setInvitee}: UsersProps) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [users, setUsers] = React.useState([]);
   const {userId, getToken} = useAuth();
@@ -45,6 +47,7 @@ const Users = ({trip, isPopupVisible, setPopupVisible}: UsersProps) => {
             id = {user.id}
             isPopupVisible={isPopupVisible}
             setPopupVisible={setPopupVisible}
+            user={invitee}
           />
       )})}
     </ScrollView>

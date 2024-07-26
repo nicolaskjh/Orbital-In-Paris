@@ -12,6 +12,7 @@ const InvitePage = () => {
   const router = useRouter();
   const trip = useLocalSearchParams();
   const [isPopupVisible, setPopupVisible] = React.useState(false);
+  const [invitee, setInvitee] = React.useState(0);
 
   return (
     <View className="flex flex-col justify-between h-full w-full bg-white">
@@ -19,7 +20,8 @@ const InvitePage = () => {
       <View className="flex w-full items-center">
         <Header text="Users" size="md"/>
       </View>
-      <Users trip={trip} isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
+      <Users trip={trip} isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} invitee={invitee} setInvitee={setInvitee}/>
+      <InvitePopup isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} tripCode={trip.invite_code} invitation={invitee}/>
       <NavigationBar/>
     </View>
   );

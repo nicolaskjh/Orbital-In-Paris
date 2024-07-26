@@ -8,12 +8,19 @@ type UserProps = {
   name: string,
   age: number,
   interests: string,
-  isPopupVisible: boolean,
   id: number,
+  isPopupVisible: boolean,
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  invitee: number;
+  setInvitee: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const User = ( {name, age, interests, isPopupVisible, setPopupVisible}: UserProps ) => {
+const User = ( {name, age, interests, id, isPopupVisible, setPopupVisible, invitee, setInvitee}: UserProps ) => {
+  const handleInvitePress = () => {
+    setInvitee(id);
+    setPopupVisible(!isPopupVisible);
+  }
+
   return (
     <View className="flex flex-row h-1/10 px-4 py-1.5 border-b border-gray-500 items-center justify-between">
       <Image source={placeholderProfilePicture} className="w-14 h-14 rounded-full"/>
@@ -22,8 +29,7 @@ const User = ( {name, age, interests, isPopupVisible, setPopupVisible}: UserProp
         <Text className="text-sm pl-4">Age: {age}</Text>
         <Text className="text-sm pl-4">Interests: {interests}</Text>
       </View>
-      <Button text="Invite" type="plain" textType="bold" corners="rounded" size="fitPadding" onPress={() => setPopupVisible(!isPopupVisible)}/>
-      <InvitePopup isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} tripCode= {trip.invite_code} invitation = {key}/>
+      <Button text="Invite" type="plain" textType="bold" corners="rounded" size="fitPadding" onPress={handleInvitePress}/>
     </View>
   );
 }

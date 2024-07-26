@@ -12,7 +12,7 @@ type InvitePopupProps = {
   invitation: any
 }
 
-const InvitePopup = ({ isPopupVisible, setPopupVisible }: InvitePopupProps) => {
+const InvitePopup = ({ isPopupVisible, setPopupVisible, tripCode, invitation }: InvitePopupProps) => {
   const [message, setMessage] = React.useState("");
 
   const exitPopup = () => {
