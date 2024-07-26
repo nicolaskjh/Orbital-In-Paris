@@ -14,7 +14,7 @@ const GooglePlacesInput = ({placeholder}: GooglePlacesInputProps) => {
         console.log(data, details);
       }}
       query={{
-        key: 'YOUR API KEY',
+        key: process.env.EXPO_PUBLIC_GOOGLE_API_KEY,
         language: 'en',
       }}
       styles={{
