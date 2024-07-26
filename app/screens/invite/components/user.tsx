@@ -9,6 +9,7 @@ type UserProps = {
   age: number,
   interests: string,
   isPopupVisible: boolean,
+  id: number,
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -22,6 +23,7 @@ const User = ( {name, age, interests, isPopupVisible, setPopupVisible}: UserProp
         <Text className="text-sm pl-4">Interests: {interests}</Text>
       </View>
       <Button text="Invite" type="plain" textType="bold" corners="rounded" size="fitPadding" onPress={() => setPopupVisible(!isPopupVisible)}/>
+      <InvitePopup isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} tripCode= {trip.invite_code} invitation = {key}/>
     </View>
   );
 }

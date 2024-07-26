@@ -1,5 +1,5 @@
 import { supabaseClient } from "./supabaseClient";
-import { parseISO, differenceInCalendarDays, addYears} from "date-fns";
+import { parseISO, differenceInCalendarDays, addYears, format} from "date-fns";
 
 export const getItineraries = async ({userId,token}) => {
     const supabase = await supabaseClient(token);
@@ -362,13 +362,19 @@ export const getPeople = async ({token, userId, range}) => {
         .eq('user_id', userId);
     const id = profileData[0].id;
     const date = profileData[0].dateOfBirth;
-    const startDate = addYears(parseISO(date), range);
-    const endDate = addYears(parseISO(date), -1 * range);
+    const country = profileData[0].country;
+    const startDate = format(addYears(date, range), 'yyyy-MM-dd');
+    const endDate = format(addYears(date, -1 * range), 'yyyy-MM-dd');
+    const ranges = `${startDate}`
+    const rangess = `${endDate}`
     const { data: profilesData, error } = await supabase
         .from('profiles')
         .select('*')
-        .rangeLte(dateOfBirth, `[${startDate}, ${endDate}]`)
+        .ilike('country', `%${country}%`)
+        .lt('dateOfBirth', startDate)
+        .gt('dateOfBirth', endDate)
     console.log(profilesData)
+    console.log(error)
     return profilesData;
 }
 

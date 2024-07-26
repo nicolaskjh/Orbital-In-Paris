@@ -13,7 +13,7 @@ type FinderProps = {
 }
 
 const Finder = ({ isPopupVisible, setPopupVisible, trip }: FinderProps) => {
-  const [range, setRange] = React.useState("");
+  const [range, setRange] = React.useState(0);
   const router = useRouter();
  
   const exitPopup = () => {
@@ -22,6 +22,7 @@ const Finder = ({ isPopupVisible, setPopupVisible, trip }: FinderProps) => {
 
   const handleSearch = () => {
     setPopupVisible(!isPopupVisible);
+    trip.range = range;
     router.push({pathname: 'invite', params: trip});
   }
 

@@ -20,7 +20,6 @@ const InvitePage = () => {
         <Header text="Users" size="md"/>
       </View>
       <Users trip={trip} isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
-      <InvitePopup isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} tripCode="ABC123"/>
       <NavigationBar/>
     </View>
   );

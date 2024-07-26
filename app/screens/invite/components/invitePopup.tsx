@@ -9,6 +9,7 @@ type InvitePopupProps = {
   isPopupVisible: boolean,
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
   tripCode: string,
+  invitation: any
 }
 
 const InvitePopup = ({ isPopupVisible, setPopupVisible }: InvitePopupProps) => {

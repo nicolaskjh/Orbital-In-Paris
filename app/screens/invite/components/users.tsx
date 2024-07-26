@@ -3,6 +3,8 @@ import { ScrollView, Text } from 'react-native';
 import User from './user';
 import { useAuth } from '@clerk/clerk-react';
 import { getPeople } from '@/utils/supabaseRequests';
+import  InvitePopup  from './invitePopup';
+import { differenceInCalendarYears } from 'date-fns';
 
 type UsersProps = {
   trip: any;
@@ -20,8 +22,7 @@ const Users = ({trip, isPopupVisible, setPopupVisible}: UsersProps) => {
       setIsLoading(true);
       try {
       const token = await getToken({ template: 'supabase' });
-      const users = await getPeople({token});
-      console.log(users)
+      const users = await getPeople({token, userId, range: trip.range});
       setUsers(users);
       } catch (error) {
         console.error(error);
@@ -29,6 +30,7 @@ const Users = ({trip, isPopupVisible, setPopupVisible}: UsersProps) => {
     }
     fetchPeople();
     setIsLoading(false);
+    console.log(trip)
   }, []);
 
   return (
@@ -40,11 +42,11 @@ const Users = ({trip, isPopupVisible, setPopupVisible}: UsersProps) => {
             name={user.name}
             age={user.age}
             interests={user.interests}
+            id = {user.id}
             isPopupVisible={isPopupVisible}
             setPopupVisible={setPopupVisible}
           />
       )})}
-      <User name="User 1" isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible}/>
     </ScrollView>
   );
 }
