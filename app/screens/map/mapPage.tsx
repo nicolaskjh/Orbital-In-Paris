@@ -13,9 +13,9 @@ const MapPage = () => {
 
   return (
     <View className="flex-1 flex-col justify-between items-center pt-20 bg-white">
-      <TextField placeholder="Search" value={location} type="full" secureEntry={false} onChangeText={(location) => setLocation(location)}/>
-      <GooglePlacesInput text = "Origin"/>
-      <GooglePlacesInput text = "Destination"/>
+      {/* <TextField placeholder="Search" value={location} type="full" secureEntry={false} onChangeText={(location) => setLocation(location)}/> */}
+      <GooglePlacesInput placeholder="Origin"/>
+      <GooglePlacesInput placeholder="Destination"/>
       <MapView style={{width: '100%', height: '82.5%'}} showsUserLocation={true} loadingEnabled={true}/>
       <NavigationBar/>
     </View>
