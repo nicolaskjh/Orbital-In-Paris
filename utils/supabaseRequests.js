@@ -373,6 +373,7 @@ export const getPeople = async ({token, userId, range}) => {
         .ilike('country', `%${country}%`)
         .lt('dateOfBirth', startDate)
         .gt('dateOfBirth', endDate)
+        .neq('id', id)
     console.log(profilesData)
     console.log(error)
     return profilesData;
@@ -392,4 +393,20 @@ export const sendInvites = async ({token, userId, id, message}) => {
             "message": message
         })
     return user;
+}
+
+export const getInvites = async ({token, userId}) => {
+    const supabase = await supabaseClient(token);
+    const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('user_id', userId);
+    const id = profileData[0].id;
+    const { data, error } = await supabase
+        .from('invitation')
+        .select('*,sender(*)')
+        .eq('receiver', id)
+        .order('id', {ascending: false});
+    console.log(data)
+    return data
 }
