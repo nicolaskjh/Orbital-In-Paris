@@ -47,7 +47,8 @@ const Users = ({trip, isPopupVisible, setPopupVisible, invitee, setInvitee}: Use
             id = {user.id}
             isPopupVisible={isPopupVisible}
             setPopupVisible={setPopupVisible}
-            user={invitee}
+            invitee={invitee}
+            setInvitee={setInvitee}
           />
       )})}
     </ScrollView>

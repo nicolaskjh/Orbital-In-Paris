@@ -28,7 +28,7 @@ const InvitePopup = ({ isPopupVisible, setPopupVisible, tripCode, invitation }: 
                 <Button text="X" type="borderless" textType="bold" size="fit" corners="rounded" onPress={exitPopup}/>
               </View>
               <Header text="Send a message and an" size="md" padding="none" verticalPadding={false} textAlign="center"/>
-              <Header text="invite to (name)!" size="md" padding="none" verticalPadding={false} textAlign="center"/>
+              <Header text={`invite to ${invitation}!`} size="md" padding="none" verticalPadding={false} textAlign="center"/>
               <View className="flex-1 flex-col w-full items-center py-2">
                 <TextField placeholder="Message" value={message} onChangeText={setMessage}/>
               </View>

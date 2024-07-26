@@ -19,6 +19,7 @@ const User = ( {name, age, interests, id, isPopupVisible, setPopupVisible, invit
   const handleInvitePress = () => {
     setInvitee(id);
     setPopupVisible(!isPopupVisible);
+    console.log(invitee);
   }
 
   return (
