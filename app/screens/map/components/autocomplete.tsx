@@ -1,17 +1,35 @@
 import React from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { useRef } from 'react';
 
 type GooglePlacesInputProps = { 
-  placeholder: string
+  placeholder: string,
+  mapRef: any,
+  func: any
 }
 
-const GooglePlacesInput = ({placeholder}: GooglePlacesInputProps) => {
+const GooglePlacesInput = ({placeholder,mapRef,func}: GooglePlacesInputProps) => {
+  async function moveToLocation(latitude,longitude,mapRef) {
+    mapRef.current.animateToRegion({
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    },2000);
+    const location = {
+      latitude,
+      longitude
+    }
+    func(location);
+  }
+
   return (
     <GooglePlacesAutocomplete
-      placeholder={placeholder}
+      placeholder="Hello"
+      fetchDetails={true}
       onPress={(data, details = null) => {
         // 'details' is provided when fetchDetails = true
-        console.log(data, details);
+        moveToLocation(details?.geometry?.location.lat,details?.geometry?.location.lng ,mapRef);
       }}
       query={{
         key: process.env.EXPO_PUBLIC_GOOGLE_API_KEY,
@@ -22,19 +40,21 @@ const GooglePlacesInput = ({placeholder}: GooglePlacesInputProps) => {
           flex: 1,
         },
         textInputContainer: {
-          width: '80%',
+          width: '100%',
           borderWidth: 1,
           borderRadius: 24,
           paddingHorizontal: 8,
           paddingTop: 4,
+          
         },
         textInput: {
           height: 38,
           color: 'black',
           fontSize: 14,
+          placeholder: "hello",
+          placeholderTextColor: 'black'
         },
         listView: {
-          
         },
         row: {
           backgroundColor: 'white',
