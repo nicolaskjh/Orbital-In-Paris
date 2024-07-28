@@ -24,7 +24,6 @@ export const claudePromptRequest = async ({trip,token}) => {
         }
       });
       
-
     const obj = JSON.parse(message.content[0].text);
 
     for (var keys in obj) {

@@ -35,7 +35,7 @@ const SignupPage = () => {
         // change the UI to our pending section.
         setPendingVerification(true);
       } catch (err: any) {
-        console.error(JSON.stringify(err, null, 2));
+        alert(err.errors[0].message);
       }
     };
   
